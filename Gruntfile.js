@@ -32,7 +32,8 @@ module.exports = function(grunt) {
                     sourceMap: false
                 },
                 files: {
-                    'app/css/styles.css': ['assets/styles/main.scss']
+                    'app/css/styles.css': ['assets/styles/main.scss'],
+                    'app/css/pretty.css': ['assets/styles/pretty.scss']
                 }
             }
         },
@@ -83,7 +84,8 @@ module.exports = function(grunt) {
                     roundingPrecision: -1
                 },
                 files: [{
-                    'app/css/styles.min.css': ['app/css/styles.css']
+                    'app/css/styles.min.css': ['app/css/styles.css'],
+                    'app/css/pretty.min.css': ['app/css/pretty.css']
                 }]
             },
             required: {

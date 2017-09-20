@@ -3,20 +3,20 @@
         <span flex><h3>Donaciones</h3></span>
         <md-button ng-if="selected.length" ng-click="showRemoveDialog($event)" class="md-fab md-mini md-warn md-raised md-hue-2"
             aria-label="Remove">
-            <md-icon aria-label="Borrar Crud" class="material-icons bolder">
+            <md-icon aria-label="Borrar Donacion" class="material-icons bolder">
                 delete
             </md-icon>
         </md-button>
-        <md-button ng-click="showAddDialog($event)" class="md-fab md-primary md-raised" aria-label="Add" ng-disabled="false">
+        <!-- <md-button ng-click="showAddDialog($event)" class="md-fab md-primary md-raised" aria-label="Add" ng-disabled="false">
             <md-icon aria-label="Agregar Crud" class="material-icons bolder">
                 add
             </md-icon>
-        </md-button>
+        </md-button> -->
     </div>
 </md-toolbar>
 <md-content flex>
     <md-subheader>
-        <div search-objects-bar search="search" objects="donations"></div>
+        <div search-objects-bar search="search"></div>
     </md-subheader>
     <md-table-container>
         <table md-table md-row-select ng-model='selected'>
@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody md-body>
-                <tr md-row ng-repeat="donation in (filteredItems = (donations | filter:search | orderBy:'date')) | limitTo: F.paginate: (currentPage - 1) * F.paginate" md-select='donation' md-select-id='$id' ng-click="showSaveDialog($event, donation)"
+                <tr md-row ng-repeat="donation in (filteredItems = (donations | filter:search | orderBy:'date')) | limitTo: F.paginate: (currentPage - 1) * F.paginate" md-select='donation' md-select-id='$id' 
                     class="noright" ng-class="{'disabled': donation.pickedUp}">
                     <td md-cell>{{donation.date | date: 'dd/MM/YYYY HH:mm'}}</td>
                     <td md-cell>{{donation.name}}</td>

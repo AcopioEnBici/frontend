@@ -18,8 +18,8 @@ angular.module("app")
                 })
                 .state('deliver', {
                     url: '/entregar',
-                    templateUrl: 'partials/home/deliver.html',
-                    controller: 'DeliverCtrl'
+                    templateUrl: 'partials/home/volunteer.html',
+                    controller: 'VolunteerCtrl'
                 })
                 .state('admin', {
                     url: '/admin',
@@ -36,10 +36,10 @@ angular.module("app")
                     templateUrl: 'partials/admin/donations.html',
                     controller: 'AdminDonationsCtrl'
                 })
-                .state('admin.delivers', {
+                .state('admin.volunteers', {
                     url: '/voluntarios',
-                    templateUrl: 'partials/admin/delivers.html',
-                    controller: 'AdminDeliversCtrl'
+                    templateUrl: 'partials/admin/volunteers.html',
+                    controller: 'AdminVolunteersCtrl'
                 })
                 .state('admin.main', {
                     url: '/main',

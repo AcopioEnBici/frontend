@@ -176,10 +176,9 @@ md-list-item.disabled {
     background: rgba(0,0,0,0.2);
 }
 
-// table {
-//     border-collapse: collapse;
-//     width: 100%;
-//     tr  {
-//         border: 1px solid gray;
-//     }
-// }
+.twitterButton {
+    background: #3CACE0;
+    span, md-icon {
+        color: white !important;
+    }
+}

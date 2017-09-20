@@ -17,12 +17,14 @@ angular.module('app')
             
             $scope.login = function() {
                 AppF.loading = true;
-                $log.debug('login', $scope.credentials);
+                $log.debug('login', $scope.admin);
                 root.child('users').orderByChild('email').equalTo($scope.admin.email).once('value', function(snap){
                     var usersFromDB = snap.val();
+                    console.log(usersFromDB, 'userR');
                     if(usersFromDB){
                         for(var uid in usersFromDB){
                             var userFromDB = usersFromDB[uid];
+                            console.log(userFromDB, 'user');
                             if(userFromDB.active){
                                 $scope.auth.$signInWithEmailAndPassword($scope.admin.email, $scope.admin.password).then(function(user) {
                                     AppF.user = user;

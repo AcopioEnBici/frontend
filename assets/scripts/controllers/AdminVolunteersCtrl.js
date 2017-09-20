@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('AdminDeliversCtrl', [
+    .controller('AdminVolunteersCtrl', [
         "$rootScope",
         "$scope",
         "errAlertS",
@@ -12,27 +12,33 @@ angular.module('app')
         function($rootScope, $scope, errAlertS, successAlertS, $firebaseArray, F, $log) {
             var initiated = false;
             var root = firebase.database().ref("/");
-            $scope.delivers = [];
+            $scope.volunteers = [];
 
             var init = function() {
                 initiated = true;
-                $scope.delivers = $firebaseArray(root.child('delivers'));
+                $scope.volunteers = $firebaseArray(root.child('volunteers'));
                 $log.debug('Donation Ctrl initiated');
             }
 
-            $scope.save = function(deliver){
-                $log.debug('saving', deliver);
-                deliver.updatedAt = moment().valueOf();
-                deliver.updatedBy = AppF.user.uid;
-                $scope.delivers.$save($scope.deliver).then(function(){
+            $scope.save = function(volunteer){
+                $log.debug('saving', volunteer);
+                volunteer.updatedAt = moment().valueOf();
+                volunteer.updatedBy = F.user.uid;
+                $scope.volunteers.$save(volunteer).then(function(){
                     successAlertS('Se guardó registro');
                 }, errAlertS);
             }
 
-            $scope.activate = function(deliver){
-                $log.debug('activate', deliver);
-                deliver.active = true;
-                $scope.save(deliver);
+            $scope.activate = function(volunteer){
+                $log.debug('activate', volunteer);
+                volunteer.active = true;
+                $scope.save(volunteer);
+            }
+
+            $scope.deactivate = function(volunteer){
+                $log.debug('deactivate', volunteer);
+                volunteer.active = false;
+                $scope.save(volunteer);
             }
 
             $rootScope.$on('loggedIn', function(event, logged) {

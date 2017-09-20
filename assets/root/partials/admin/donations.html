@@ -41,9 +41,13 @@
                     <td md-cell>{{donation.contactInfo}}</td>
                     <td md-cell>{{donation.pickedUp ? 'Si' : 'No'}}</td>
                     <th md-cell>
-                        <md-button class="md-primary md-mini md-fav" ng-click="pickup(donation)">
+                        <md-button ng-show='!donation.pickedUp' class="md-primary md-mini md-fav" ng-click="pickup(donation)">
                             <md-tooltip md-direction="left">Recoger</md-tooltip>
                             <md-icon>check</md-icon>
+                        </md-button>
+                        <md-button ng-show='donation.pickedUp' class="md-primary md-mini md-fav" ng-click="cancelPickup(donation)">
+                            <md-tooltip md-direction="left">Cancelar</md-tooltip>
+                            <md-icon>close</md-icon>
                         </md-button>
                     </th>
                 </tr>

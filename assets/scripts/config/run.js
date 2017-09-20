@@ -12,7 +12,8 @@ angular.module("app")
         "allowedOfflineStates",
         "loginRedirectPath",
         "AppF",
-        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, loginRedirectPath, F) {
+        "$firebaseObject",
+        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, loginRedirectPath, F, $firebaseObject) {
             firebase.initializeApp(config);
 
             var auth = firebase.auth();
@@ -32,11 +33,20 @@ angular.module("app")
             var c = 1;
             function check(user) {
                 c++
-                $log.debug(user, c)
+                $log.debug(user, c);
+                F.user = user;
                 if (angular.isObject(user)) {
-                    F.user = angular.copy(user);
+                    // $rootScope.F = F;
+                    if(F.user.providerData){
+                        if(F.user.providerData[0].providerId == 'twitter.com'){
+                            firebase.database().ref('/volunteers').child(user.uid).once('value', function(snap){
+                                var profile = snap.val();
+                                if(profile) F.userProfile = profile;
+                            });
+                        }
+                    }
                     // User signed in!
-                    $rootScope.$emit('loggedIn', true);
+                    $rootScope.$broadcast('loggedIn', true);
                 } else {
                     if (!isPermitted($state.current.name)) {
                         $state.go(loginRedirectPath);

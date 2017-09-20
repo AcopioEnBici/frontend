@@ -16,15 +16,16 @@ angular.module('app')
 
             var init = function() {
                 initiated = true;
-                $scope.donations = $firebaseArray(root.child('donators').orderByChild('pickedUp').equalTo(false));
+                // .orderByChild('pickedUp').equalTo(false) 
+                $scope.donations = $firebaseArray(root.child('donators'));
                 $log.debug('Donation Ctrl initiated');
             }
 
             $scope.save = function(donation){
                 $log.debug('saving', donation);
                 donation.updatedAt = moment().valueOf();
-                donation.updatedBy = AppF.user.uid;
-                $scope.donations.$save($scope.donation).then(function(){
+                donation.updatedBy = F.user.uid;
+                $scope.donations.$save(donation).then(function(){
                     successAlertS('Se guardó registro');
                 }, errAlertS);
             }
@@ -32,6 +33,12 @@ angular.module('app')
             $scope.pickup = function(donation){
                 $log.debug('picked up', donation);
                 donation.pickedUp = true;
+                $scope.save(donation);
+            }
+
+            $scope.cancelPickup = function(donation){
+                $log.debug('cancel picked up', donation);
+                donation.pickedUp = false;
                 $scope.save(donation);
             }
 

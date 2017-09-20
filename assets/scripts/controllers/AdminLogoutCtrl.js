@@ -8,7 +8,8 @@ angular.module("app")
         "errAlertS",
         "AppF",
         "$localStorage",
-        function($scope, $firebaseAuth, $log, errAlert, F, $localStorage){
+        "$state",
+        function($scope, $firebaseAuth, $log, errAlert, F, $localStorage, $state){
             var logout = function(){
                 $log.debug("Bye");
                 firebase.auth().signOut().then(function () {
@@ -16,6 +17,7 @@ angular.module("app")
                     firebase.database().goOffline();
                     F.user = false;
                     $localStorage.lastPage = null;
+                    $state.go('home');
                 }, errAlert);
             }
             logout();

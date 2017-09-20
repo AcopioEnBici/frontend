@@ -6,9 +6,19 @@ angular.module('app')
         '$log',
         '$mdSidenav',
         '$timeout',
-        function($scope, $log, $mdSidenav, $timeout) {
+        '$rootScope',
+        'AppF',
+        function($scope, $log, $mdSidenav, $timeout, $rootScope, AppF) {
             $log.debug('inside MenuCtrl');
-            $scope.toggleLeft = buildDelayedToggler('left');
+            // $scope.toggleLeft = buildDelayedToggler('left');
+            $scope.toggleLeft = function(){
+                $mdSidenav('left')
+                .toggle()
+                .then(function() {
+                    $log.debug("toggle is done");
+                });
+            }
+            $rootScope.F = AppF;
 
             $scope.close = function() {
                 $mdSidenav('left')

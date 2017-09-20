@@ -7,7 +7,7 @@ angular.module('app')
         "errAlertS",
         "successAlertS",
         "NgMap",
-        function($rootScope, $scope, errAlertS, successAlertS,NgMap) {
+        function($rootScope, $scope, errAlertS, successAlertS, NgMap) {
             var initiated = false;
             var root = firebase.database().ref("/");
             $scope.donator = {};

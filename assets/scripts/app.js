@@ -11,6 +11,7 @@ angular.module('app', [
     'ngSanitize',
     'ngMessages',
     'firebase',
+    'NgMap',
     'ui.router',
     'ngMaterial',
     'ngStorage',

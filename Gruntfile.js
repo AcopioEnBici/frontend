@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     Estructura para que sirva este grunt:
     - root del proyecto
         - assets
-            - root 
+            - root
                 -> aqui van todos los archivos y carpetas que van en el root de app como images, partials y el index.html
             - styles
                 -> todos los estilos como quieras poneros en subcarpetas (como te acomodes mejor)
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
                         'assets/bower_components/moment/locale/es.js',
                         'assets/bower_components/angular/angular.js',
                         'assets/bower_components/angular-moment/angular-moment.js',
-                        // 'assets/bower_components/ng-maps/dist/map.js',
+                        'assets/bower_components/ng-maps/dist/map.js',
                         'assets/bower_components/angular-sanitize/angular-sanitize.js',
                         'assets/bower_components/angular-animate/angular-animate.js',
                         'assets/bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     'app/css/required.min.css': [
-                        'app/css/required.css', 
+                        'app/css/required.css',
                         'assets/bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.css',
                         'assets/bower_components/angular-material-paging/src/angular-material-paging.css',
                         'assets/bower_components/angular-material-data-table/dist/md-data-table.css',
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
                 options: {
                     preserveComments: false,
                     mangle: false,
-                    compress: { // commonly used to remove debug code blocks for production 
+                    compress: { // commonly used to remove debug code blocks for production
                         global_defs: {
                             "DEBUG": false
                         },
@@ -122,7 +122,7 @@ module.exports = function(grunt) {
                 options: {
                     preserveComments: false,
                     mangle: false,
-                    compress: { // commonly used to remove debug code blocks for production 
+                    compress: { // commonly used to remove debug code blocks for production
                         global_defs: {
                             "DEBUG": false
                         },
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        copy: { // copia los archivos de assets/root al root de app, asi como las 
+        copy: { // copia los archivos de assets/root al root de app, asi como las
             build: {
                 /*options: {
                     process: function (content, srcpath) {
@@ -170,44 +170,44 @@ module.exports = function(grunt) {
         },
         'http-server': {
             build: {
-                // the server root directory 
+                // the server root directory
                 root: 'app/',
                 port: 9999,
 
-                // the host ip address 
-                // If specified to, for example, "127.0.0.1" the server will 
-                // only be available on that ip. 
-                // Specify "0.0.0.0" to be available everywhere 
+                // the host ip address
+                // If specified to, for example, "127.0.0.1" the server will
+                // only be available on that ip.
+                // Specify "0.0.0.0" to be available everywhere
                 host: "0.0.0.0",
                 //host: "0.0.0.1",
                 showDir: false,
                 autoIndex: true,
 
-                // server default file extension 
+                // server default file extension
                 ext: "html",
 
-                // run in parallel with other tasks 
+                // run in parallel with other tasks
                 runInBackground: false,
 
-                // specify a logger function. By default the requests are 
-                // sent to stdout. 
+                // specify a logger function. By default the requests are
+                // sent to stdout.
                 logFn: function(req, res, error) {},
 
-                // Proxies all requests which can't be resolved locally to the given url 
-                // Note this this will disable 'showDir' 
+                // Proxies all requests which can't be resolved locally to the given url
+                // Note this this will disable 'showDir'
                 //proxy: "http://afich.dev",
 
-                /// Use 'https: true' for default module SSL configuration 
-                /// (default state is disabled) 
+                /// Use 'https: true' for default module SSL configuration
+                /// (default state is disabled)
                 /*https: {
                     cert: "cert.pem",
                     key : "key.pem"
                 },*/
 
-                // Tell grunt task to open the browser 
+                // Tell grunt task to open the browser
                 openBrowser: true,
 
-                // customize url to serve specific pages 
+                // customize url to serve specific pages
                 /*customPages: {
                     "/readme": "README.md",
                     "/readme.html": "README.html"

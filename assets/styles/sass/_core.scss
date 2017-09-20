@@ -1,0 +1,192 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  color: $gray;
+	@include font-montserrat-light;
+  line-height: 1.25;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @include font-montserrat-black;
+  a {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 64px;
+  margin: 0 0 16px;
+}
+h2 {
+  font-size: 48px;
+  margin: 0 0 16px;
+}
+h3 {
+  font-size: 36px;
+  margin: 0 0 16px;
+}
+h4 {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+h5 {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+h6 {
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+p, ol, ul {
+  margin: 0 0 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.btn {
+  border-radius: 24px;
+  @include font-montserrat-bold;
+  font-size: 18px;
+  text-decoration: none;
+  .fa {
+    color: inherit;
+  }
+}
+
+article {
+  ul {
+    padding-left: 34px;
+    li {
+      list-style-position: outside;
+      list-style-type: disc;
+    }
+  }
+  ol {
+    padding-left: 34px;
+    li {
+      list-style-position: outside;
+      margin-left: 0;
+      padding-left: 2px;
+    }
+  }
+  blockquote {
+    background: $gray-soft;
+    border-left: none;
+    @include font-montserrat-bold;
+    font-size: 25px;
+    margin: 42px 10px 36px 10px !important;
+    padding: 22px 40px 22px 60px;
+    position: relative;
+    &:before {
+      content: "\f10d";
+      color: $gray;
+      display: block;
+      font-family: 'FontAwesome';
+      font-size: 58px;
+      text-rendering: auto;
+      left: -10px;
+      position: absolute;
+      top: -20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    &:after {
+      content: "\f10e";
+      color: $gray;
+      display: block;
+      font-family: 'FontAwesome';
+      font-size: 58px;
+      text-rendering: auto;
+      right: -10px;
+      position: absolute;
+      bottom: -20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  pre {
+    border-radius: 0px;
+    margin: 24px 0 24px 0;
+    padding: 16px;
+    white-space: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: $yellow;
+    text-decoration: underline;
+    &:hover, &:active, &:focus {
+      color: $magenta;
+    }
+  }
+}
+
+.alignnone {
+	margin:5px 20px 20px 0;
+}
+
+.center,
+.aligncenter,
+div.aligncenter {
+	display:block;
+	margin:5px auto 5px auto;
+}
+
+.alignright {
+	float:right;
+	margin:5px 0 20px 20px;
+	@media only screen and (max-width: 767px) {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+.alignleft {
+	float:left;
+	margin:5px 20px 20px 0;
+	@media only screen and (max-width: 767px) {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+a img.alignright {
+	float:right;
+	margin:5px 0 20px 20px;
+	@media only screen and (max-width: 767px) {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+a img.alignnone {
+	margin:5px 20px 20px 0;
+}
+
+a img.alignleft {
+	float:left;
+	margin:5px 20px 20px 0;
+	@media only screen and (max-width: 767px) {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+a img.aligncenter {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}

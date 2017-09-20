@@ -1,0 +1,34 @@
+/*
+Child theme styles
+*/
+
+//Google Fonts import
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,700,900');
+
+// Theme Configuration
+@import "mixins";
+@import "variables";
+@import "core";
+
+
+// Vendor
+//@import "vendor/slick.scss";
+
+// Organisms
+@import "organisms/header";
+@import "organisms/footer";
+@import "organisms/forms";
+
+// Molecules
+@import "molecules/hero.scss";
+@import "molecules/news";
+@import "molecules/matches";
+@import "molecules/streams";
+@import "molecules/sidebar";
+
+// Pages
+@import "pages/blank-template";
+@import "pages/single-post";
+
+// Templates
+//@import "templates/template.scss";

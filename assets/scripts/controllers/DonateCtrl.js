@@ -6,14 +6,19 @@ angular.module('app')
         "$scope",
         "errAlertS",
         "successAlertS",
-        function($rootScope, $scope, errAlertS, successAlertS) {
+        "NgMap",
+        function($rootScope, $scope, errAlertS, successAlertS,NgMap) {
             var initiated = false;
             var root = firebase.database().ref("/");
             $scope.donator = {};
 
             var init = function() {
                 initiated = true;
-                console.log('Donate Ctrl initiated');
+                NgMap.getMap().then(function(map) {
+                  console.log(map.getCenter());
+                  console.log('markers', map.markers);
+                  console.log('shapes', map.shapes);
+                });
             }
 
             $scope.save = function(){
@@ -27,7 +32,7 @@ angular.module('app')
 
             $scope.ubicateMe = function(){
                 console.log('ubicating me');
-                // 
+                //
             }
 
             init();

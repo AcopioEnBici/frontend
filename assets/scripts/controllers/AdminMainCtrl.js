@@ -10,11 +10,6 @@ angular.module('app')
             var initiated = false;
 
             var init = function() {
-                $scope.modules = [{
-                    name: "Cruds",
-                    state: "admin.cruds",
-                    total: F.cruds.length
-                }];
                 initiated = true;
             }
 

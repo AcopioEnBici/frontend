@@ -2,6 +2,10 @@
   "name": "acopio-en-bici-web",
   "version": "0.0.1",
   "dependencies": {},
+  "author": {
+    "name": "Ce-Acatl",
+    "email": "edgardo@tu-desarrollo.com"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^1.0.0",

@@ -4,9 +4,8 @@
         <md-button ng-click="toggleLeft()" class="md-icon-button" hide-gt-sm aria-label="Settings" ng-disabled="false">
             <md-icon style="color: white" aria-label="hey" class="material-icons step">menu</md-icon>
         </md-button>
-        <div flex><h4>Admin <small class="md-caption">v{{F.version}}</small></h4></div>
-        <div hide-sm hide-xs ng-if="F.user" menu-links></div>
-        <!--<img class="mini-thumbnail" src="images/logo.jpg" alt="Logo">-->
+        <div flex><h4>Admin</h4></div>
+        <div hide-sm hide-xs menu-links></div>
     </md-toolbar>
     <div flex layout="column" ui-view></div>
 </div>

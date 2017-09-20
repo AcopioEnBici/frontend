@@ -15,31 +15,39 @@
     </div>
 </md-toolbar>
 <md-content flex>
-    <md-list>
-        <md-subheader>
-            <div search-objects-bar search="search" objects="donations"></div>
-        </md-subheader>
-        <table>
-            <tr>
-                <th>Fecha</th>
-                <th>Donador</th>
-                <th>Categoría</th>
-                <th>Tamaño de Mochila</th>
-                <th>Info de Contacto</th>
-                <th>Recogido</th>
-            </tr>
-            <tr ng-repeat="donation in (filteredItems = (donations | filter:search | orderBy:'date'))" ng-click="showSaveDialog($event, donation)"
-                class="noright" ng-class="{'disabled': donation.pickedUp}">
-                <td>{{donation.date | date: 'dd/MM/YYYY HH:mm'}}</td>
-                <td>{{donation.name}}</td>
-                <td>{{donation.categoryOfDonations}}</td>
-                <td>{{donation.sizeOfBag}}</td>
-                <td>{{donation.contactInfo}}</td>
-                <td>{{donation.pickedUp ? 'Si' : 'No'}}</td>
-                <th>
-                    <md-button class="md-primary md-mini" ng-click="pickup(donation)">Recoger</md-button>
-                </th>
-            </tr>
+    <md-subheader>
+        <div search-objects-bar search="search" objects="donations"></div>
+    </md-subheader>
+    <md-table-container>
+        <table md-table>
+            <thead md-head>
+                <tr md-row>
+                    <th md-column md-order-by='date'>Fecha</th>
+                    <th md-column md-order-by='name'>Donador</th>
+                    <th md-column md-order-by='categoryOfDonations'>Categoría</th>
+                    <th md-column md-order-by='sizeOfBag'>Tamaño de Mochila</th>
+                    <th md-column md-order-by='contactInfo'>Info de Contacto</th>
+                    <th md-column md-order-by='pickedUp'>Recogido</th>
+                    <th md-column>Acciones</th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row ng-repeat="donation in (filteredItems = (donations | filter:search | orderBy:'date'))" ng-click="showSaveDialog($event, donation)"
+                    class="noright" ng-class="{'disabled': donation.pickedUp}">
+                    <td md-cell>{{donation.date | date: 'dd/MM/YYYY HH:mm'}}</td>
+                    <td md-cell>{{donation.name}}</td>
+                    <td md-cell>{{donation.categoryOfDonations}}</td>
+                    <td md-cell>{{donation.sizeOfBag}}</td>
+                    <td md-cell>{{donation.contactInfo}}</td>
+                    <td md-cell>{{donation.pickedUp ? 'Si' : 'No'}}</td>
+                    <th md-cell>
+                        <md-button class="md-primary md-mini md-fav" ng-click="pickup(donation)">
+                            <md-tooltip md-direction="left">Recoger</md-tooltip>
+                            <md-icon>check</md-icon>
+                        </md-button>
+                    </th>
+                </tr>
+            </tbody>
         </table>
-    </md-list>
+    </md-table-container>
 </md-content>

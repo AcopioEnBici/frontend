@@ -43,7 +43,11 @@ module.exports = function(grunt) {
                     'app/js/required.js': [
                         'assets/bower_components/jquery/dist/jquery.js',
                         'assets/bower_components/firebase/firebase.js',
+                        'assets/bower_components/moment/min/moment.min.js',
+                        'assets/bower_components/moment/locale/es.js',
                         'assets/bower_components/angular/angular.js',
+                        'assets/bower_components/angular-moment/angular-moment.js',
+                        // 'assets/bower_components/ng-maps/dist/map.js',
                         'assets/bower_components/angular-sanitize/angular-sanitize.js',
                         'assets/bower_components/angular-animate/angular-animate.js',
                         'assets/bower_components/angular-ui-router/release/angular-ui-router.js',

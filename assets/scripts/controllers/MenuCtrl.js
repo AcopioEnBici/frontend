@@ -17,10 +17,10 @@ angular.module('app')
                     $log.debug("close LEFT is done");
                 });
             }
-                /**
-                 * Supplies a function that will continue to operate until the
-                 * time is up.
-                 */
+            /**
+             * Supplies a function that will continue to operate until the
+             * time is up.
+             */
             function debounce(func, wait, context) {
                 var timer;
                 return function debounced() {

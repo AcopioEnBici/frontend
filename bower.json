@@ -19,6 +19,8 @@
     "ngstorage": "^0.3.11",
     "angular-material-data-table": "^0.10.9",
     "textAngular": "^1.5.9",
-    "ng-maps": "ng-map#*"
+    "ng-maps": "ng-map#*",
+    "moment": "momentjs#^2.18.1",
+    "angular-moment": "^1.0.1"
   }
 }

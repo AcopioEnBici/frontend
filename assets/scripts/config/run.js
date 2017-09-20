@@ -35,18 +35,6 @@ angular.module("app")
                 $log.debug(user, c)
                 if (angular.isObject(user)) {
                     F.user = angular.copy(user);
-                    // console.error(user, "AADDD");
-                    //    if (!user.emailVerified && !$localStorage.verificationMailSent) {
-                    //        user.sendEmailVerification();
-                    //        $state.go("verify-account");
-                    //        $localStorage.verificationMailSent = true;
-                    //    }
-                    //     set token for $http calls
-                    //    firebase.auth().currentUser.getToken(true).then(function(token) {
-                    //        var x = ""; //"Basic ";
-                    //        $http.defaults.headers.common.Authorization = x + token;
-                    //    });
-
                     // User signed in!
                     $rootScope.$emit('loggedIn', true);
                 } else {

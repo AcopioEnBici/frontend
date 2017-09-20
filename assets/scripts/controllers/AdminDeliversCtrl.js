@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('AdminDonationsCtrl', [
+    .controller('AdminDeliversCtrl', [
         "$rootScope",
         "$scope",
         "errAlertS",
@@ -12,27 +12,27 @@ angular.module('app')
         function($rootScope, $scope, errAlertS, successAlertS, $firebaseArray, F, $log) {
             var initiated = false;
             var root = firebase.database().ref("/");
-            $scope.donations = [];
+            $scope.delivers = [];
 
             var init = function() {
                 initiated = true;
-                $scope.donations = $firebaseArray(root.child('donators').orderByChild('pickedUp').equalTo(false));
+                $scope.delivers = $firebaseArray(root.child('delivers'));
                 $log.debug('Donation Ctrl initiated');
             }
 
-            $scope.save = function(donation){
-                $log.debug('saving', donation);
-                donation.updatedAt = moment().valueOf();
-                donation.updatedBy = AppF.user.uid;
-                $scope.donations.$save($scope.donation).then(function(){
+            $scope.save = function(deliver){
+                $log.debug('saving', deliver);
+                deliver.updatedAt = moment().valueOf();
+                deliver.updatedBy = AppF.user.uid;
+                $scope.delivers.$save($scope.deliver).then(function(){
                     successAlertS('Se guardó registro');
                 }, errAlertS);
             }
 
-            $scope.pickup = function(donation){
-                $log.debug('picked up', donation);
-                donation.pickedUp = true;
-                $scope.save(donation);
+            $scope.activate = function(deliver){
+                $log.debug('activate', deliver);
+                deliver.active = true;
+                $scope.save(deliver);
             }
 
             $rootScope.$on('loggedIn', function(event, logged) {

@@ -36,6 +36,11 @@ angular.module("app")
                     templateUrl: 'partials/admin/donations.html',
                     controller: 'AdminDonationsCtrl'
                 })
+                .state('admin.delivers', {
+                    url: '/voluntarios',
+                    templateUrl: 'partials/admin/delivers.html',
+                    controller: 'AdminDeliversCtrl'
+                })
                 .state('admin.main', {
                     url: '/main',
                     templateUrl: 'partials/admin/main.html',
@@ -46,12 +51,17 @@ angular.module("app")
                     templateUrl: 'partials/admin/logout.html',
                     controller: 'AdminLogoutCtrl'
                 })
-                // cruds
-                .state('admin.cruds', {
-                    url: '/cruds',
-                    templateUrl: 'partials/admin/cruds.html',
-                    controller: 'CrudsCtrl'
+                .state('admin.register', {
+                    url: '/registro',
+                    templateUrl: 'partials/admin/register.html',
+                    controller: 'AdminRegisterCtrl'
                 })
+                // cruds
+                // .state('admin.cruds', {
+                //     url: '/cruds',
+                //     templateUrl: 'partials/admin/cruds.html',
+                //     controller: 'CrudsCtrl'
+                // })
 
             $urlRouterProvider.otherwise('/inicio');
         }

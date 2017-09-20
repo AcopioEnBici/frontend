@@ -15,10 +15,6 @@ angular.module('app')
                 var root = firebase.database().ref("/");
                 $log.debug("AdminCtrl Loaded");
                 F.inModule = 'admin';
-                F.cruds = $firebaseArray(root.child('cruds'));
-                F.cruds.$loaded(function(cruds){
-                    F.cruds = cruds;
-                });
             }
 
             $rootScope.$on('loggedIn', function(event, logged) {

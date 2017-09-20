@@ -1,3 +1,9 @@
+/**
+ * Proyecto: Acopio en Bici
+ * Fecha:    19/sept/2017
+ * Author:   edgardo@tu-desarrollo.com
+ */
+
 'use strict';
 
 angular.module('app', [
@@ -12,5 +18,6 @@ angular.module('app', [
     'lfNgMdFileInput',
     'textAngular',
     'md.data.table',
-    'slugifier'
+    'slugifier',
+    'angularMoment'
 ]);

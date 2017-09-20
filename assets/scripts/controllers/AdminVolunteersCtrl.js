@@ -13,6 +13,8 @@ angular.module('app')
             var initiated = false;
             var root = firebase.database().ref("/");
             $scope.volunteers = [];
+            $scope.currentPage = 1;
+            $scope.selected = [];
 
             var init = function() {
                 initiated = true;
@@ -39,6 +41,43 @@ angular.module('app')
                 $log.debug('deactivate', volunteer);
                 volunteer.active = false;
                 $scope.save(volunteer);
+            }
+
+            $scope.remove = function(volunteer){
+                $log.debug("removing: ", volunteer);
+                return $scope.volunteers.$remove(volunteer);
+            }
+
+            $scope.showRemoveDialog = function(ev){
+                $mdDialog.show(
+                    $mdDialog.confirm({
+                        onComplete: function afterShowAnimation() {
+                            var $dialog = angular.element(document.querySelector('md-dialog'));
+                            var $actionsSection = $dialog.find('md-dialog-actions');
+                            var $cancelButton = $actionsSection.children()[0];
+                            var $confirmButton = $actionsSection.children()[1];
+                            angular.element($confirmButton).addClass('md-raised md-warn');
+                            angular.element($cancelButton).addClass('md-raised');
+                        }
+                    })
+                    .title('Remover ' + $scope.selected.length + ' voluntarios?')
+                    .textContent('No podrá recuperar los datos')
+                    .ariaLabel('Lucky day')
+                    .targetEvent(event)
+                    .ok('Eliminar')
+                    .cancel('Cancelar')
+                ).then(function() {
+                    var count = 0;
+                    $log.debug("Deleting: ", $scope.selected);
+                    angular.forEach($scope.selected, function(record) {
+                        $scope.remove(record).then(function() {
+                            if (count == $scope.selected.length) {
+                                successAlert("Se borraron " + count + " voluntarios");
+                                $scope.selected = [];
+                            }
+                        });
+                    });
+                });
             }
 
             $rootScope.$on('loggedIn', function(event, logged) {

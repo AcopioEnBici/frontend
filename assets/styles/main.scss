@@ -1,0 +1,365 @@
+// to enable bootstrap uncomment this
+//$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+//@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'toasts.scss';
+@import 'animations.scss';
+@import 'angular-material-extend.scss';
+
+$blue: rgba(0, 43, 139, 1);
+$lightBlue: rgba(34,151,216,1);
+$yellow: rgba(246,255,0,1);
+$mainFont: 'Reem Kufi', sans-serif;
+$purple: rgba(83,109,254,0.87);
+
+.purpleC {
+    color: $purple;
+}
+
+.overflowHidden {
+    overflow: hidden;
+}
+
+.bolder {
+    font-weight: 900;
+}
+
+.box {
+    max-height: 350px;
+    min-height: 300px;
+}
+
+.lgBox {
+    min-height: 710px;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.contained {
+    object-fit: contain;
+}
+
+.h100 {
+    height: 100px;
+}
+
+.centered {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.marginRight {
+    margin-right: 50px;
+}
+
+.align-right {
+    text-align: right;
+    float: right;
+}
+
+.c-right {
+    object-position: right;
+}
+
+.thumbnail {
+    height: 200px;
+    img.pull-right {
+        width: 50px;
+    }
+}
+
+.mini-thumbnail {
+    width: 60px;
+    height: 60px;
+}
+
+.blueB {
+    background-color: $blue;
+    color: white;
+}
+
+.skipMenu {
+    padding-top: 64px;
+}
+
+#footer {
+    background: rgba(0,0,0,0.7);
+}
+
+#loginPanel {
+    background: lightgray;
+}
+
+.footNote {
+    font-size: 0.65em;
+}
+
+.logo {
+    font-family: $mainFont;
+    font-size: 20px;
+    font-weight: 800;
+    
+}
+
+img.logo {
+    height: 50px;
+    width: 50px;
+}
+
+
+
+#mainMenu {
+    font-family: $mainFont;
+    background-color: rgba(0, 43, 139, 0.81);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#farmaPhoto {
+    background: url('../images/farma-photo.jpg') no-repeat;
+    background-size: cover;
+    background-position: right bottom;
+    height: 400px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    p {
+        color: white;
+        font-size: 1.4em;
+        font-weight: 600;
+        font-family: $mainFont;
+    }
+}
+
+.noMargin {
+    margin: 0;
+}
+
+#logoAfich {
+    overflow: hidden;
+    width: 100%;
+    img {
+        max-height: 150px;
+        height: auto;
+        // width: 100%;
+        //max-width: 245px;
+    }
+}
+
+#farmaFrame1 {
+    background: url('../images/farma-frame-1.jpg');
+    width: 100%;
+    display: block;
+    background-position: right bottom;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+#farmaFrame2 {
+    background: url('../images/farma-frame-2.jpg');
+    width: 100%;
+    display: block;
+    background-position: right bottom;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+#farmaFrame3 {
+    background: url('../images/farma-frame-3.jpg');
+    width: 100%;
+    display: block;
+    background-position: right bottom;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+#mainInfo {
+    background: $blue;
+    width: 85%;
+}
+
+// noticias
+.withText {
+    color: $blue;
+    font-family: $mainFont;
+    h3 {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+    hr {
+        width: 25%;
+        height: 5px;
+        border-color: $blue;
+        background: $blue;
+    }
+    hr.white {
+        border-color: whitesmoke;
+        background: whitesmoke;
+    }
+    p {
+        margin: 20px;
+        text-align: justify;
+        font-size: 1em;
+    }
+}
+
+.farmacia {
+    position: relative;
+    overflow: hidden;
+    img {
+        height: 100%;
+        width: 100%;
+        max-height: 100% !important;
+    }
+    figcaption {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background: rgba(255, 255, 255, .7);
+        color: $blue;
+        font-family: $mainFont;
+        font-weight: 900;
+        font-size: 15px;
+        text-transform: uppercase;
+        padding: 10px;
+        text-align: right;
+    }
+}
+
+.picWith2Texts {
+    figcaption {
+        color: whitesmoke;
+        font-family: $mainFont;
+        text-transform: uppercase;
+        padding: 20px;
+        h2 {
+            text-align: center;
+            font-weight: 900;
+            height: 30%;
+            line-height: 100%;
+            vertical-align: middle;
+        }
+        p {
+            text-align: justify;
+            font-size: 15px;
+            height: 70%;
+            vertical-align: middle;
+        }
+    }
+}
+
+// redes sociales y publicidad
+
+#twitterBox {
+    background: white;
+    overflow: scroll;
+    max-height: 100%;
+    div {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+}
+
+.timeline-Widget {
+    margin: 0 auto;
+}
+
+// .fb-page {
+//     display: block !important;
+//     span {
+//         margin: 20px auto !important;
+//         display: block !important;
+//     }
+// }
+
+#unete {
+    background: $blue;
+}
+#suscribete {
+    background: $lightBlue;
+}
+#unete, #subscribete {
+    color: whitesmoke;
+}
+
+.niceForm {
+    background: whitesmoke;
+    input, textarea, select, md-list-item {
+        width: 100%;
+        min-width: 300px;
+    }
+}
+
+#vision {
+    background-image: url('../images/vision.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    figcaption {
+        text-align: center;
+        p {
+            font-size: 1.5em;
+        }
+    }
+}
+
+// splash
+
+[ng-cloak].splash {
+    display: block !important;
+}
+.splash {
+    display: none;
+}
+.splash {
+    background: $blue;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    img {
+        margin: 20% auto;
+        display: block;
+    }
+}
+
+#subHeader {
+    font-family: $mainFont;
+    max-height: 70px;
+    h4 {
+        margin: 0;
+    }
+}
+
+.mdBox {
+    min-height: 400px !important;
+}
+
+#facebookBox {
+    display: block;
+    text-align: center;
+}
+
+md-checkbox {
+    .md-container {
+        left: auto; 
+        right: 0px;
+    }
+}
+
+md-list-item.disabled {
+    background: rgba(0,0,0,0.2);
+}

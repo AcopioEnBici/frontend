@@ -1,0 +1,45 @@
+<md-toolbar md-scroll-shrink ng-if="true" class="md-tall md-primary md-hue-2" md-whiteframe="1" layout-align="center center">
+    <div class="md-toolbar-tools">
+        <span flex><h3>Donaciones</h3></span>
+        <md-button ng-if="F.somethingIsSelected(donations)" ng-click="showRemoveDialog($event)" class="md-fab md-mini md-warn md-raised md-hue-2"
+            aria-label="Remove">
+            <md-icon aria-label="Borrar Crud" class="material-icons bolder">
+                delete
+            </md-icon>
+        </md-button>
+        <md-button ng-click="showAddDialog($event)" class="md-fab md-primary md-raised" aria-label="Add" ng-disabled="false">
+            <md-icon aria-label="Agregar Crud" class="material-icons bolder">
+                add
+            </md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content flex>
+    <md-list>
+        <md-subheader>
+            <div search-objects-bar search="search" objects="donations"></div>
+        </md-subheader>
+        <table>
+            <tr>
+                <th>Fecha</th>
+                <th>Donador</th>
+                <th>Categoría</th>
+                <th>Tamaño de Mochila</th>
+                <th>Info de Contacto</th>
+                <th>Recogido</th>
+            </tr>
+            <tr ng-repeat="donation in (filteredItems = (donations | filter:search | orderBy:'date'))" ng-click="showSaveDialog($event, donation)"
+                class="noright" ng-class="{'disabled': donation.pickedUp}">
+                <td>{{donation.date | date: 'dd/MM/YYYY HH:mm'}}</td>
+                <td>{{donation.name}}</td>
+                <td>{{donation.categoryOfDonations}}</td>
+                <td>{{donation.sizeOfBag}}</td>
+                <td>{{donation.contactInfo}}</td>
+                <td>{{donation.pickedUp ? 'Si' : 'No'}}</td>
+                <th>
+                    <md-button class="md-primary md-mini" ng-click="pickup(donation)">Recoger</md-button>
+                </th>
+            </tr>
+        </table>
+    </md-list>
+</md-content>

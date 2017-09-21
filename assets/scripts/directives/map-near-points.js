@@ -10,7 +10,7 @@ angular.module('app')
                 scope: {
                     points: '=',
                     distance: '=',
-                    onPointSelect: '&'
+                    onPointSelect: '='
                 },
                 templateUrl: 'partials/map-near-points.html',
                 link: function(scope, ele, attrs){
@@ -24,16 +24,23 @@ angular.module('app')
                     scope.pointSelected = false;
                     scope.nearesPoints = [];
 
+                    scope.selectPoint = function(point){
+                        if(point != scope.onPointSelect) scope.onPointSelect = point;
+                        else scope.onPointSelect = false;
+                    }
+
                     var getNearestPoints = function(){
-                        NgMap.getMap().then(function(map){
-                            var center = map.getCenter();
-                            google.maps.event.trigger(map, "resize");
-                            map.setCenter(center);
-                            scope.nearestPoints = geoDistanceFilter(scope.points, scope.currentP, scope.distance);
-                            console.log(scope.nearesPoints, scope.points, scope.currentP, "WTF");
-                        }).catch(function(err){
-                            console.error(err);
-                        });
+                        scope.nearestPoints = geoDistanceFilter(scope.points, scope.currentP, scope.distance);
+                        setTimeout(function(){
+                            NgMap.getMap().then(function(map){
+                                var center = map.getCenter();
+                                google.maps.event.trigger(map, "resize");
+                                // map.setCenter(center);
+                                // console.log(scope.nearesPoints, scope.points, scope.currentP);
+                            }).catch(function(err){
+                                console.error(err);
+                            });
+                        }, 1000)
                     }
 
                     document.ready(function(){

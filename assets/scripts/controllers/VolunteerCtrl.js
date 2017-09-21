@@ -16,7 +16,10 @@ angular.module('app')
             $scope.volunteer = {};
             var root = firebase.database().ref('/');
             $scope.auth = $firebaseAuth();
-            $scope.distanceFromMe = 100;
+            $scope.distanceFromMe = 10;
+            $scope.distanceForCenters = 100;
+            $scope.selectedDonation = false;
+            $scope.selectedCenter = false;
 
             $scope.save = function(){
                 $log.debug('saving', $scope.volunteer);
@@ -32,8 +35,32 @@ angular.module('app')
                 $scope.auth.$signInWithRedirect('twitter').catch(errAlertS);
             }
 
-            $scope.selectDonation = function(donation){
-                console.log(donation, "COOL");
+            $scope.deliverDonation = function(){
+                $scope.selectedDonation.status = 'entregado';
+                $scope.selectedDonation.deliveredAt = $scope.selectedCenter.$id;
+                $scope.deliveredBy = F.user.uid;
+                $scope.updatedAt = moment().valueOf();
+                $scope.selectedDonation.$save().then(function(){
+                    successAlertS('Gracias!! Se entrego la donación correctamente!');
+                }, errAlertS);
+            }
+
+            $scope.pickupDonation = function(){
+                $scope.selectedDonation.status = 'recogido';
+                // $scope.selectedDonation.deliveredAt = $scope.selectedCenter.$id;
+                $scope.pickedBy = F.user.uid;
+                $scope.updatedAt = moment().valueOf();
+                $scope.selectedDonation.$save().then(function(){
+                    successAlertS('Gracias!! Se entrego la donación correctamente!');
+                }, errAlertS);
+            }
+
+            $scope.cancelPickup = function(){
+                $scope.selectedDonation.status = null;
+                $scope.updatedAt = moment().valueOf();
+                $scope.selectedDonation.$save().then(function(){
+                    successAlertS('Se canceló el acopio de la donación');
+                }, errAlertS);
             }
 
             var checkIfUserExist = function(uid){
@@ -52,7 +79,8 @@ angular.module('app')
                 return promise.promise;
             }
 
-            var initMap = function(){
+            var initMap = function(){ 
+                // @todo cambiar esto por la llamada a donaciones con status correcto para ser recogidas
                 $scope.donationsAvailable = [
                     { latitude: 67.331, longitude: 56.214 },
                     { latitude: 67.331, longitude: 56.214 },
@@ -64,6 +92,9 @@ angular.module('app')
                     { latitude: 67.331, longitude: 56.214 },
                     { latitude: 67.331, longitude: 56.214 },
                 ];
+                $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'))
+
+                $scope.centersAvailable = $firebaseArray(root.child('centers').orderByChild('active').equalTo(true));
             }
 
             var init = function(user){

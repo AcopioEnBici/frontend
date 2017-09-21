@@ -41,8 +41,19 @@
                 <label>Horario en el que se puede recoger</label>
                 <input name="deliverSchedule" type="text" ng-model="donator.deliverSchedule" placeholder="ej: entre 4:00 pm y 7:00 pm" />
             </md-input-container>
-            <h5>Mi ubicación exacta (permitir recoger ubicación)</h5>
-            <div id="map">MAPA</div>
+            <md-input-container class="md-block" flex>
+                <label>Palabra secreta</label>
+                <input name="secretPassword" type="text" ng-model="donator.secretPassword" placeholder="ej: Palabra secreta para recoger la donación" />
+            </md-input-container>
+
+            <div id="map">
+              <p>Ubicación de recolección</p>
+              <ng-map id="map">
+                <marker centered="true" position="current-location" draggable="true"></marker>
+              </ng-map>
+            </div>
+            <h5>TODO:Falta colocar el no soy un robot</h5>
+
             <br>
             <div layour="row">
                 <div flex></div>

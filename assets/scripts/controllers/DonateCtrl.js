@@ -14,6 +14,9 @@ angular.module('app')
         "successAlertS",
         "NgMap",
         function($rootScope, $scope, errAlertS, successAlertS, NgMap) {
+
+
+
             var initiated = false;
             $scope.map;
             var root = firebase.database().ref("/");
@@ -21,13 +24,12 @@ angular.module('app')
 
             var init = function() {
                 initiated = true;
-
-                  //Victor:Para inicializar el mapa se tiene que poner el ID que se tiene en el template
-                  NgMap.getMap("map").then(function(evtMap){
-                    $scope.map = evtMap;
-                  });
-
             }
+
+            //Victor:Para inicializar el mapa se tiene que poner el ID que se tiene en el template
+            NgMap.getMap("map").then(function(evtMap){
+              $scope.map = evtMap;
+            });
 
             //Victor: funcion para obtener longitud y latitud
             $scope.getGrabPosition = function(){
@@ -53,6 +55,13 @@ angular.module('app')
                 console.log('ubicating me');
                 //
             }
+
+            $scope.getCoords = function() {
+              NgMap.getGeoLocation($scope.addressInput).then(function(latlng) {
+                $scope.map.markers[0].setPosition(latlng);
+                $scope.map.setCenter(latlng);
+              });
+            };
 
             init();
         }

@@ -46,13 +46,17 @@
                 <input name="secretPassword" type="text" ng-model="donator.secretPassword" placeholder="ej: Palabra secreta para recoger la donación" />
             </md-input-container>
 
-            <div id="map">
-              <p>Ubicación de recolección</p>
+            <div id="mapWrapper">
+              <md-input-container class="md-block" flex>
+                <h5>Ubicaci&oacute;n de recolecci&oacute;n</h5>
+                <input ng-model="addressInput" places-auto-complete types="['geocode']" on-place-changed="getCoords()"  component-restrictions="{country:'mx'}"/>
+              </md-input-container>
               <ng-map id="map">
-                <marker centered="true" position="current-location" draggable="true"></marker>
+                <marker centered="true" center="lng,lat" position="current-location" draggable="true"></marker>
               </ng-map>
             </div>
-            <h5>TODO:Falta colocar el no soy un robot</h5>
+
+          <!--  <h5>TODO:Falta colocar el no soy un robot</h5> PERO DEBEMOS TENER UN DOMINIO-->
 
             <br>
             <div layour="row">

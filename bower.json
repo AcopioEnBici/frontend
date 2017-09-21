@@ -21,6 +21,7 @@
     "textAngular": "^1.5.9",
     "moment": "momentjs#^2.18.1",
     "angular-moment": "^1.0.1",
-    "ngmap": "^1.18.4"
+    "ngmap": "^1.18.4",
+    "angular-recaptcha": "^4.1.0"
   }
 }

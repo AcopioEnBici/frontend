@@ -11,7 +11,8 @@ angular.module('app')
         "$state",
         "$q",
         "AppF",
-        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F) {
+        "$firebaseArray",
+        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F, $firebaseArray) {
             var initiated = false;
             $scope.volunteer = {};
             var root = firebase.database().ref('/');
@@ -80,7 +81,6 @@ angular.module('app')
             }
 
             var initMap = function(){ 
-                // @todo cambiar esto por la llamada a donaciones con status correcto para ser recogidas
                 $scope.donationsAvailable = [
                     { latitude: 67.331, longitude: 56.214 },
                     { latitude: 67.331, longitude: 56.214 },
@@ -92,7 +92,7 @@ angular.module('app')
                     { latitude: 67.331, longitude: 56.214 },
                     { latitude: 67.331, longitude: 56.214 },
                 ];
-                $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'))
+                // $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'))
 
                 $scope.centersAvailable = $firebaseArray(root.child('centers').orderByChild('active').equalTo(true));
             }

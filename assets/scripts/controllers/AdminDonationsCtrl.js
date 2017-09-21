@@ -20,7 +20,7 @@ angular.module('app')
             var init = function() {
                 initiated = true;
                 // .orderByChild('pickedUp').equalTo(false) 
-                $scope.donations = $firebaseArray(root.child('donators'));
+                $scope.donations = $firebaseArray(root.child('donations'));
                 $log.debug('Donation Ctrl initiated');
             }
 

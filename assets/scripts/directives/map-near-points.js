@@ -4,7 +4,8 @@ angular.module('app')
     .directive('mapNearPoints', [
         "geoDistanceFilter",
         "NgMap",
-        function(geoDistanceFilter, NgMap){
+        "$document",
+        function(geoDistanceFilter, NgMap, $document){
             return {
                 restrict: 'E',
                 scope: {
@@ -43,7 +44,7 @@ angular.module('app')
                         }, 1000)
                     }
 
-                    document.ready(function(){
+                    $document.ready(function(){
                         var getNearestWatcher = scope.$watchGroup(['points','distance'], function(all){
                             if(all[0] && all[1]){
                                 if(scope.points.length) {

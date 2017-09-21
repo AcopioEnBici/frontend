@@ -1,7 +1,7 @@
 /**
  * Proyecto: Acopio en Bici
  * Fecha:    19/sept/2017
- * Author:   edgardo@tu-desarrollo.com
+ * Autores:   edgardo@tu-desarrollo.com // pongan aca sus nombres, nicks o correos porfa :D
  */
 
 'use strict';

@@ -16,6 +16,7 @@ angular.module('app')
             $scope.volunteer = {};
             var root = firebase.database().ref('/');
             $scope.auth = $firebaseAuth();
+            $scope.distanceFromMe = 100;
 
             $scope.save = function(){
                 $log.debug('saving', $scope.volunteer);
@@ -29,6 +30,10 @@ angular.module('app')
 
             $scope.loginWithTwitter = function(){
                 $scope.auth.$signInWithRedirect('twitter').catch(errAlertS);
+            }
+
+            $scope.selectDonation = function(donation){
+                console.log(donation, "COOL");
             }
 
             var checkIfUserExist = function(uid){
@@ -47,8 +52,21 @@ angular.module('app')
                 return promise.promise;
             }
 
+            var initMap = function(){
+                $scope.donationsAvailable = [
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                    { latitude: 67.331, longitude: 56.214 },
+                ];
+            }
+
             var init = function(user){
-                console.log(user, "DAMn")
                 if(user){
                     if(user.providerData){
                         if(user.providerData[0]){
@@ -59,6 +77,7 @@ angular.module('app')
                                     if(volunteer){
                                         console.log(volunteer, 'volunteer existe');
                                         $scope.volunteer = volunteer;
+                                        initMap();
                                     } else {
                                         $scope.volunteer = {
                                             registeredTovolunteer: false,

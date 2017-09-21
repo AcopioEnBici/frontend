@@ -43,7 +43,7 @@
             <h3>Gracias! Ya estás registrado como voluntario</h3>
             <h5 ng-show="volunteer.active">y tu cuenta ya fue activada</h4>
             <h5 ng-show="!volunteer.active">tu cuenta no ha sido activada</h4>
-            <!-- <volunteer-near-donations donations="volunteerNearDonations"></volunteer-near-donations> -->
+            <map-near-points on-point-select='selectDonation($event)' points="donationsAvailable" distance="distanceFromMe"></map-near-points>
             <!-- Aquí pueden ir otras cosas que se le tengan que asignar al voluntario como sus tareas -->
         </div>
         <!-- Si está logeado como admin -->

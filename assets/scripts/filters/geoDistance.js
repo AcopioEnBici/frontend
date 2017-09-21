@@ -39,7 +39,7 @@ angular.module("app")
                for(var t=0;t < points.length; t++){
                   points[t].distance = dist(myLocation, points[t]).kilometers;
                }
-               return data.filter(function(item){
+               return points.filter(function(item){
                   return item.distance < distance
                });
             }

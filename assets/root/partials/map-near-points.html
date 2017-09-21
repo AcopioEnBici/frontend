@@ -1,0 +1,20 @@
+<ng-map zoom="14">
+    <marker 
+        id="myPosition"
+        position="current" 
+        animation="Animation.BOUNCE" 
+        centered="true"></marker>
+    <marker 
+        on-click="onPointSelect(point)" 
+        ng-repeat="point in nearestPoints track by $index"
+        id="marker-{{$index}}" 
+        position="[{{point.latitude}}, {{point.longitude}}]"></marker>
+</ng-map>
+
+<!-- <directions
+        mg-if='pointSelected'
+        draggable="false"
+        travel-mode="BICYCLING"
+        panel="{{dir.panelName}}"
+        origin="current-location"
+        destination="{{point.coordenates}}"></directions> -->

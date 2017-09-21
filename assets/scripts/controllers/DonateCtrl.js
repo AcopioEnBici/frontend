@@ -14,9 +14,6 @@ angular.module('app')
         "successAlertS",
         "NgMap",
         function($rootScope, $scope, errAlertS, successAlertS, NgMap) {
-
-
-
             var initiated = false;
             $scope.map;
             var root = firebase.database().ref("/");
@@ -36,16 +33,17 @@ angular.module('app')
               var position = $scope.map.markers[0].getPosition();
               return {
                 "lat": position.lat(),
-                "long":position.lng()
+                "long": position.lng()
               }
             }
 
             $scope.save = function(){
-
-              console.info('position', $scope.getGrabPosition());
-              console.log('saving', $scope.donator);
+                var position = $scope.getGrabPosition();
                 $scope.donator.createdAt = moment().valueOf();
+                $scope.donator.latitude = position.lat;
+                $scope.donator.longitude = position.long;
                 $scope.donator.status = 'esperando';
+                console.log('saving', $scope.donator);
                 root.child('donations').push($scope.donator).then(function(){
                     successAlertS('Gracias por registrarte como donador, en cuanto nos sea posible nos pondremos en contacto contigo');
                 }, errAlertS);
@@ -53,7 +51,6 @@ angular.module('app')
 
             $scope.ubicateMe = function(){
                 console.log('ubicating me');
-                //
             }
 
             $scope.getCoords = function() {

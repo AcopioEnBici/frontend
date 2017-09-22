@@ -82,7 +82,6 @@
             <!-- Cuando el voluntario ya recogió la donación y va a seleccionar el centro de acopio -->
             <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && !selectedCenter'>
                 <h4>Elige un centro de acopio para entregar la donación</h4>
-                <!-- <map-near-points on-point-select='selectedCenter' points="centersAvailable" distance="distanceForCenters"></map-near-points> -->
                 <ng-map id="centrosDeAcopio" zoom="14">
                     <marker centered="true" position="current-location"></marker>
                     <kml-layer url="http://paintingsolutionstx.com/Shelters.kml"></kml-layer>
@@ -90,7 +89,7 @@
             </div>
             <!-- Cuando el voluntario ya selecciono el centro de acopio al cual entregar  -->
             <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && selectedCenter'>
-                <ng-map zoom="14">
+                <ng-map id="direccionACentro" zoom="14">
                     <directions
                         draggable="false"
                         travel-mode="BICYCLING"

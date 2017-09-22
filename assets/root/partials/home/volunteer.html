@@ -60,10 +60,10 @@
                 </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono una donación -->
-            <div ng-if='volunteer.active && selectedDonation && !selectedDonation.pickedUp'>
+            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "esperando"'>
                 <h4>Elegiste la donación de {{selectedDonation.name}}</h4>
-                <p>Esta en: {{selectedDonation.addresss}}</p>
-                <ng-map zoom="14">
+                <p>Esta en: {{selectedDonation.address}}</p>
+                <ng-map id="direccionADonacion" zoom="14">
                     <directions
                         draggable="false"
                         travel-mode="BICYCLING"
@@ -80,16 +80,16 @@
                 </div>
             </div>
             <!-- Cuando el voluntario ya recogió la donación y va a seleccionar el centro de acopio -->
-            <div ng-if='volunteer.active && selectedDonation && selectedDonation.pickedUp && !selectedCenter'>
+            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && !selectedCenter'>
                 <h4>Elige un centro de acopio para entregar la donación</h4>
                 <!-- <map-near-points on-point-select='selectedCenter' points="centersAvailable" distance="distanceForCenters"></map-near-points> -->
-                <ng-map zoom="14">
-                    <marker centered="true" position="current-location" draggable="true"></marker>
-                    <kml-layer url="./centros_de_acopio.kml"></kml-layer>
+                <ng-map id="centrosDeAcopio" zoom="14">
+                    <marker centered="true" position="current-location"></marker>
+                    <kml-layer url="http://paintingsolutionstx.com/Shelters.kml"></kml-layer>
                 </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono el centro de acopio al cual entregar  -->
-            <div ng-if='volunteer.active && selectedDonation && selectedDonation.pickedUp && selectedCenter'>
+            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && selectedCenter'>
                 <ng-map zoom="14">
                     <directions
                         draggable="false"

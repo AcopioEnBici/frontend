@@ -43,7 +43,6 @@ angular.module('app')
             }
 
             var toogleMenu = function(){
-                console.log(event, "DAMN")
                 var width = $window.innerWidth;
                 if (width >= 769) {
                     console.log("big device");

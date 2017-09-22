@@ -46,11 +46,23 @@
             <!-- Cuendo el voluntario esta activo y aun no selecciona donación -->
             <div ng-if='volunteer.active && !selectedDonation'>
                 <h4>Elige un punto para ir por una donación</h4>
-                <map-near-points on-point-select='selectedDonation' points="donationsAvailable" distance="distanceFromMe"></map-near-points>
+                <ng-map id="map" zoom="14">
+                    <marker 
+                        id="myPosition"
+                        position="current" 
+                        animation="Animation.BOUNCE" 
+                        centered="true"></marker>
+                    <marker 
+                        on-click="selectPoint(point, $index)" 
+                        ng-repeat="point in nearestDonations track by point.$id"
+                        id="marker-{{point.$id}}" 
+                        position="[{{point.latitude}}, {{point.longitude}}]"></marker>
+                </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono una donación -->
             <div ng-if='volunteer.active && selectedDonation && !selectedDonation.pickedUp'>
-                <h4>Elige un punto para ir por una donación</h4>
+                <h4>Elegiste la donación de {{selectedDonation.name}}</h4>
+                <p>Esta en: {{selectedDonation.addresss}}</p>
                 <ng-map zoom="14">
                     <directions
                         draggable="false"
@@ -70,7 +82,11 @@
             <!-- Cuando el voluntario ya recogió la donación y va a seleccionar el centro de acopio -->
             <div ng-if='volunteer.active && selectedDonation && selectedDonation.pickedUp && !selectedCenter'>
                 <h4>Elige un centro de acopio para entregar la donación</h4>
-                <map-near-points on-point-select='selectedCenter' points="centersAvailable" distance="distanceForCenters"></map-near-points>
+                <!-- <map-near-points on-point-select='selectedCenter' points="centersAvailable" distance="distanceForCenters"></map-near-points> -->
+                <ng-map zoom="14">
+                    <marker centered="true" position="current-location" draggable="true"></marker>
+                    <kml-layer url="./centros_de_acopio.kml"></kml-layer>
+                </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono el centro de acopio al cual entregar  -->
             <div ng-if='volunteer.active && selectedDonation && selectedDonation.pickedUp && selectedCenter'>

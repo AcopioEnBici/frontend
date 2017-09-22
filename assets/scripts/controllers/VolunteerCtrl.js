@@ -12,7 +12,10 @@ angular.module('app')
         "$q",
         "AppF",
         "$firebaseArray",
-        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F, $firebaseArray) {
+        "NgMap",
+        "$document",
+        "geoDistanceFilter",
+        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F, $firebaseArray, NgMap, $document, geoDistanceFilter) {
             var initiated = false;
             $scope.volunteer = {};
             var root = firebase.database().ref('/');
@@ -21,6 +24,7 @@ angular.module('app')
             $scope.distanceForCenters = 100;
             $scope.selectedDonation = false;
             $scope.selectedCenter = false;
+            $scope.map;
 
             $scope.save = function(){
                 $log.debug('saving', $scope.volunteer);
@@ -81,20 +85,7 @@ angular.module('app')
             }
 
             var initMap = function(){ 
-                $scope.donationsAvailable = [
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                    { latitude: 67.331, longitude: 56.214 },
-                ];
-                // $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'))
-
-                $scope.centersAvailable = $firebaseArray(root.child('centers').orderByChild('active').equalTo(true));
+                $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'));
             }
 
             var init = function(user){
@@ -135,5 +126,45 @@ angular.module('app')
             if (F.user && !initiated) {
                 init(F.user);
             }
+
+            $scope.selectPoint = function(ev, point){
+                console.log(point, i, "select point");
+                if(point != $scope.selectedDonation) $scope.selectedDonation = point;
+                else $scope.selectedDonation = false;
+                $scope.$apply();
+            }
+
+            var getNearestDonations = function(){
+                var position = $scope.map.markers['myPosition'].getPosition();
+                $scope.currentP = {
+                    latitude: position.lat(), 
+                    longitude: position.lng()
+                }
+                $scope.nearestDonations = geoDistanceFilter($scope.donationsAvailable, $scope.currentP, $scope.distanceFromMe);
+            }
+
+            var watchMarkersThenInit = function(){
+                console.log('listening for markers My position', $scope.map.markers.myPosition)
+                $scope.$watch('map.markers.myPosition', function(myPosition){
+                    if(myPosition){
+                        getNearestDonations();
+                    }
+                });
+            }
+
+            NgMap.getMap("map").then(function(evtMap){
+                $scope.map = evtMap;
+            });
+
+            $document.ready(function(){
+                var getNearestWatcher = $scope.$watchGroup(['donationsAvailable', 'map.markers.myPosition'], function(all){
+                    if(all[0] && all[1]){
+                        if($scope.donationsAvailable.length) {
+                            watchMarkersThenInit()
+                            getNearestWatcher();
+                        }
+                    }
+                },1);
+            });
         }
     ]);

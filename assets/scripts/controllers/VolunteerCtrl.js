@@ -40,32 +40,34 @@ angular.module('app')
                 $scope.auth.$signInWithRedirect('twitter').catch(errAlertS);
             }
 
+            var saveDonation = function(donation, successMsg){
+                donation.updatedAt = moment().valueOf();
+                var id = angular.copy(donation.$id);
+                delete donation.$id;
+                delete donation.$priority;
+                delete donation.distance; // se le agrega distance por el filtro de geoLocation
+                console.log(donation, 'saving donation');
+                root.child('donations').child(id).set(donation).then(function(){
+                    successAlertS(successMsg);
+                }, errAlertS);
+            }
+
             $scope.deliverDonation = function(){
                 $scope.selectedDonation.status = 'entregado';
                 $scope.selectedDonation.deliveredAt = $scope.selectedCenter.$id;
-                $scope.deliveredBy = F.user.uid;
-                $scope.updatedAt = moment().valueOf();
-                $scope.selectedDonation.$save().then(function(){
-                    successAlertS('Gracias!! Se entrego la donación correctamente!');
-                }, errAlertS);
+                $scope.selectedDonation.deliveredBy = F.user.uid;
+                saveDonation($scope.selectedDonation, 'Gracias!! Se entrego la donación correctamente!');
             }
 
             $scope.pickupDonation = function(){
                 $scope.selectedDonation.status = 'recogido';
-                // $scope.selectedDonation.deliveredAt = $scope.selectedCenter.$id;
-                $scope.pickedBy = F.user.uid;
-                $scope.updatedAt = moment().valueOf();
-                $scope.selectedDonation.$save().then(function(){
-                    successAlertS('Gracias!! Se entrego la donación correctamente!');
-                }, errAlertS);
+                $scope.selectedDonation.pickedBy = F.user.uid;
+                saveDonation($scope.selectedDonation, 'Gracias!! Se entrego la donación correctamente!');
             }
 
             $scope.cancelPickup = function(){
-                $scope.selectedDonation.status = null;
-                $scope.updatedAt = moment().valueOf();
-                $scope.selectedDonation.$save().then(function(){
-                    successAlertS('Se canceló el acopio de la donación');
-                }, errAlertS);
+                $scope.selectedDonation = false;
+                // saveDonation($scope.selectedDonation, 'Se canceló el acopio de la donación');
             }
 
             var checkIfUserExist = function(uid){

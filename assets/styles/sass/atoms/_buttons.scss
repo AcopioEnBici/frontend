@@ -1,0 +1,28 @@
+.btn {
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  @include font-montserrat-bold;
+  font-size: 18px;
+  min-width: 220px;
+  padding: 14px 20px;
+  text-decoration: none;
+  &:hover {
+    background: $cyan !important;
+    color: white !important;
+  }
+  .fa {
+    color: inherit;
+    font-size: 22px;
+    margin-left: 8px;
+  }
+  &.btn-magenta, &.btn-send {
+    background: $magenta;
+    color: $white;
+  }
+  &.btn-yellow {
+    background: $yellow;
+    color: $gray;
+  }
+}

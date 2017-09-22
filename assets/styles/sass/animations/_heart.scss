@@ -1,0 +1,15 @@
+//Animation
+.fa-heart.success {
+  @include animation(pound .6s infinite);
+  margin-bottom: 30px;
+}
+
+// Keyframes
+@keyframes pound {
+  from {
+    @include transform(none);
+  }
+  to {
+    @include transform(scale(1.15));
+  }
+}

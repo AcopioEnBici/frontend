@@ -1,3 +1,80 @@
 .header {
-  
+  color: white;
+  float: left;
+  position: relative;
+  width: 100%;
+  &:after {
+    content: "";
+    background-image: url('../images/triangles-white.svg');
+    background-size: 100% 100%;
+    background-position: bottom center;
+    float: left;
+    height: 70px;
+    position: relative;
+    width: 100%;
+  }
+
+  .hero {
+    display: block;
+    left: 0;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    img {
+      //height: auto;
+      object-fit: cover;
+      object-position: 50% 50%;
+      width: 100%;
+    }
+    &:before {
+      background: rgba($black, 0.6);
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+    }
+    figcaption {
+      font-size: 14px;
+      opacity: 0.5;
+      position: absolute;
+      right: -40px;
+      top: 80px;
+      @include transform(rotate(-90deg));
+    }
+  }
+  .header-container {
+    display: block;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 60px 30px 0;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    h1 {
+      clear: both;
+      display: block;
+      font-size: 48px;
+      margin: 50px auto;
+      text-align: center;
+    }
+  }
+}
+
+//Responsive
+@media only screen and (max-width: 768px) {
+  .header {
+    .header-container {
+      h1 {
+        font-size: 36px;
+      }
+    }
+  }
 }

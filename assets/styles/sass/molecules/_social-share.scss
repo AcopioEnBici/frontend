@@ -1,0 +1,19 @@
+.social-share {
+  float: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+    a {
+      color: $gray;
+      font-size: 42px;
+      &:hover {
+        color: $magenta;
+      }
+    }
+  }
+}

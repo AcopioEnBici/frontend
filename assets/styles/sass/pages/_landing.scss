@@ -1,0 +1,111 @@
+.landing {
+  background-color: $cyan;
+  //padding-bottom: 50px;
+  .landing-container {
+    display: block;
+    background-image: url('../images/hero-main.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    //max-width: 1200px;
+    text-align: center;
+    padding: 50px 0 254px;
+    position: relative;
+    width: 100%;
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+    &:before {
+      background: rgba($black, 0.6);
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+    }
+    h1 {
+      color: white;
+      clear: both;
+      display: block;
+      margin: 20px auto 50px;
+    }
+    .action-btns-container {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      li {
+        display: inline;
+        margin-left: 30px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  .landing-triangles {
+    background-image: url('../images/triangles.svg');
+    background-size: 100% 100%;
+    background-position: bottom center;
+    bottom: 0;
+    display: block;
+    height: 254px;
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    width: 100%;
+    // &:after, &:before {
+    //   background-size: cover;
+    //   content: "";
+    //   float: left;
+    //   height: 100%;
+    //   width: 50%;
+    // }
+    // &:after {
+    //   background-image: url('../images/triangle-right.svg');
+    //   background-position: left bottom;
+    // }
+    // &:before {
+    //   background-image: url('../images/triangle-left.svg');
+    //   background-position: right bottom;
+    // }
+  }
+}
+
+//Responsive
+@media only screen and (max-width: 768px) {
+  .landing {
+    .landing-container {
+      .action-btns-container {
+        li {
+          display: block;
+          margin: 0 0 30px 0;
+        }
+      }
+      .landing-triangles {
+        height: 100px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-height: 621px) {
+  .landing {
+    .landing-container {
+      .landing-copy {
+        left: 50%;
+        top: 30%;
+        position: absolute;
+        @include transform(translateX(-50%));
+        width: 100%;
+        h1 {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

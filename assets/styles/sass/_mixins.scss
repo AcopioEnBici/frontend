@@ -157,6 +157,14 @@
     filter: alpha(opacity=$opacity-ie); //IE8
 }
 
+// ANIMATION
+@mixin animation($animation...) {
+  -o-animation: $animation;
+  -moz-animation: $animation;
+  -webkit-animation: $animation;
+  animation: $animation;
+}
+
 // CLEAR FIX
 %clearfix {
     *zoom: 1;

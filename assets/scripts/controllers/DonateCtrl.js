@@ -18,9 +18,15 @@ angular.module('app')
             $scope.map;
             var root = firebase.database().ref("/");
             $scope.donator = {};
+            $scope.donationSent = false;
 
             var init = function() {
                 initiated = true;
+            }
+
+            var thanks = function(){
+                $scope.donationSent = true;
+                $scope.$apply();
             }
 
             //Victor:Para inicializar el mapa se tiene que poner el ID que se tiene en el template
@@ -45,7 +51,7 @@ angular.module('app')
                 $scope.donator.status = 'esperando';
                 console.log('saving', $scope.donator);
                 root.child('donations').push($scope.donator).then(function(){
-                    successAlertS('Gracias por registrarte como donador, en cuanto nos sea posible nos pondremos en contacto contigo');
+                    thanks();
                 }, errAlertS);
             }
 

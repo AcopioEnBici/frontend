@@ -1,3 +1,42 @@
 .footer {
-  
+  background: $yellow;
+  color: $gray;
+  float: left;
+  padding: 0 0 50px 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  &:before {
+    content: "";
+    background-image: url('../images/triangles-white-footer.svg');
+    background-size: 100% 100%;
+    background-position: bottom center;
+    float: left;
+    height: 70px;
+    position: relative;
+    width: 100%;
+  }
+  a {
+    color: $gray;
+    text-decoration: underline;
+    &:hover {
+      color: $magenta;
+    }
+  }
+  .logo {
+    clear: both;
+    display: block;
+    float: none;
+    margin: 0 auto 20px;
+    max-width: 200px;
+  }
+}
+
+// Responsive
+@media only screen and (max-width: 768px) {
+  .footer {
+    .footer-container {
+      padding: 0 30px;
+    }
+  }
 }

@@ -17,18 +17,23 @@ Child theme styles
 // Organisms
 @import "organisms/header";
 @import "organisms/footer";
-@import "organisms/forms";
+@import "organisms/main-container.scss";
 
 // Molecules
-@import "molecules/hero.scss";
-@import "molecules/news";
-@import "molecules/matches";
-@import "molecules/streams";
-@import "molecules/sidebar";
+@import "molecules/nav.scss";
+@import "molecules/form.scss";
+@import "molecules/social-share.scss";
+
+// Atoms
+@import "atoms/logo.scss";
+@import "atoms/buttons.scss";
 
 // Pages
-@import "pages/blank-template";
-@import "pages/single-post";
+@import "pages/landing";
+//@import "pages/error404";
 
 // Templates
 //@import "templates/template.scss";
+
+// Animations
+@import "animations/heart";

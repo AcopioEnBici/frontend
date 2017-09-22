@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'app/css/styles.css': ['assets/styles/main.scss'],
-                    'app/css/pretty.css': ['assets/styles/pretty.scss']
+                    'app/css/pretty.css': ['assets/styles/sass/pretty.scss']
                 }
             }
         },

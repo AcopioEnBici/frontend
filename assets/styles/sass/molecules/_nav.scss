@@ -1,0 +1,129 @@
+.nav {
+  display: block;
+  left: 0;
+  padding: 30px 30px 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  ul {
+    float: right;
+    padding: 20px 10px 0 0;
+    margin: 0;
+    li {
+      border-left: 1px solid $white;
+      display: inline;
+      padding: 0 8px;
+      text-align: right;
+      a {
+        color: $white;
+        text-decoration: none;
+        &:hover {
+          color: $yellow;
+        }
+      }
+      &.active {
+        a {
+          color: $yellow;
+          text-decoration: underline;
+        }
+      }
+      &:first-child, &:last-child, &:nth-last-child(2) {
+        border-left: none;
+      }
+      &:nth-last-child(2) {
+        padding-left: 12px;
+      }
+      &:last-child, &:nth-last-child(2) {
+        a {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .nav-trigger {
+    display: none;
+    float: right;
+    font-size: 24px;
+    margin-right: 20px;
+    //@include transition(none);
+    &.active {
+      display: block;
+      float: none;
+      position: absolute;
+      right: 20px;
+      top: 30px;
+      #menu {
+        color: yellow;
+      }
+      #close {
+        color: #333;
+        display: none;
+      }
+      &:hover, &:focus {
+        color: white;
+      }
+    }
+  }
+  &.mobile-nav-active {
+    background: rgba($magenta, 0.95);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    .nav-trigger{
+      float: none;
+      position: absolute;
+      right: 20px;
+      top: 30px;
+      #menu {
+        display: none;
+      }
+      #close {
+        
+      }
+    }
+    
+    &:hover, &:focus {
+      color: white;
+    }
+    .logo {
+      float: none;
+      display: block;
+      margin: 0 auto;
+      max-width: 180px;
+    }
+    ul {
+      display: block;
+      text-align: center;
+      width: 100%;
+      li {
+        border: none;
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+        a {
+          font-size: 18px;
+        }
+        &:last-child, &:nth-last-child(2) {
+          display: inline-block;
+          a {
+            font-size: 32px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav {
+    //padding: 10px 0;
+    ul {
+      display: none;
+    }
+    .nav-trigger {
+      display: block;
+    }
+  }
+}

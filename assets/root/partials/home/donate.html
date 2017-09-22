@@ -127,7 +127,6 @@
                             <label for="ubication">Ubicaci&oacute;nes de recolecci&oacute;n </label>
                             <input id="addressInput" placeholder="Introduce un lugar" ng-model="addressInput" places-auto-complete types="['geocode']" name="ubication" on-place-changed="getCoords()" component-restrictions="{country:'mx'}"
                             />
-                            <h5>a donde:{{addressInput}}</h5>
                         </div>
                         <div class="form-field" ng-class="{'error': donateForm.address.$invalid}">
                             <label for="address">Dirección Completa <span>*</span></label>

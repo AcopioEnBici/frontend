@@ -39,7 +39,7 @@ angular.module('app')
               var position = $scope.map.markers[0].getPosition();
               return {
                 "lat": position.lat(),
-                "long": position.lng()
+                "lng": position.lng()
               }
             }
 
@@ -47,7 +47,7 @@ angular.module('app')
                 var position = $scope.getGrabPosition();
                 $scope.donator.createdAt = moment().valueOf();
                 $scope.donator.latitude = position.lat;
-                $scope.donator.longitude = position.long;
+                $scope.donator.longitude = position.lng;
                 $scope.donator.status = 'esperando';
                 console.log('saving', $scope.donator);
                 root.child('donations').push($scope.donator).then(function(){
@@ -60,7 +60,9 @@ angular.module('app')
             }
 
             $scope.getCoords = function() {
-              NgMap.getGeoLocation($scope.addressInput).then(function(latlng) {
+              //TODO: Revisar esta variable para que lo aplique con el modelo de addressInput
+              var value24 = document.getElementById("addressInput").value;
+              NgMap.getGeoLocation(value24).then(function(latlng) {
                 $scope.map.markers[0].setPosition(latlng);
                 $scope.map.setCenter(latlng);
               });

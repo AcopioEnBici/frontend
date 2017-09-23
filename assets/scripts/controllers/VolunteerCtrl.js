@@ -248,8 +248,8 @@ angular.module('app')
             $scope.selectCenter = function(ev, point){
                 console.log(point, i, "select point");
                 $scope.selectedCenter = point;
-                $scope.selectedDonation.status = 'recogiendo';
-                $scope.selectedDonation.deliverInCenter = 'entregando';
+                $scope.selectedDonation.status = 'entregando';
+                $scope.selectedDonation.deliverInCenter = $scope.selectedCenter.$id;
                 saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Escogiste un centro');
                     $scope.$apply();

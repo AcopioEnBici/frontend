@@ -100,7 +100,7 @@ $purple: rgba(83,109,254,0.87);
     font-family: $mainFont;
     font-size: 20px;
     font-weight: 800;
-    
+
 }
 
 img.logo {
@@ -138,7 +138,7 @@ img.logo {
     display: none;
 }
 .splash {
-    background: $blue;
+    background: #ffffff;
     height: 100%;
     width: 100%;
     z-index: 9999;
@@ -150,6 +150,28 @@ img.logo {
     img {
         margin: 20% auto;
         display: block;
+    }
+    .heart-container {
+        display: block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        .fa-heart {
+            color: #E91E63;
+            // display: block;
+            font-size: 144px;
+            // position: absolute;
+            // top: 50%;
+            // left: 50%;
+
+            // width: 164px;
+            // height: 164px;
+        }
     }
 }
 
@@ -167,7 +189,7 @@ img.logo {
 
 md-checkbox {
     .md-container {
-        left: auto; 
+        left: auto;
         right: 0px;
     }
 }

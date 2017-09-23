@@ -21,6 +21,16 @@ angular.module("app")
                     templateUrl: 'partials/home/volunteer.html',
                     controller: 'VolunteerCtrl'
                 })
+                .state('chooseDonation', {
+                    url: '/selecciona-donacion',
+                    templateUrl: 'partials/home/1-choose-donation.html',
+                    controller: 'ChooseDonationCtrl'
+                })
+                .state('chooseCenter', {
+                    url: '/selecciona-centro-de-acopio',
+                    templateUrl: 'partials/home/2-choose-center.html',
+                    controller: 'ChooseCenterCtrl'
+                })
                 .state('admin', {
                     url: '/admin',
                     templateUrl: 'partials/admin/index.html',

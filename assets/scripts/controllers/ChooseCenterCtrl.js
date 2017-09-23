@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('VolunteerCtrl', [
+    .controller('ChooseCenterCtrl', [
         "$rootScope",
         "$scope",
         "$log",
@@ -20,6 +20,11 @@ angular.module('app')
             $scope.volunteer = {};
             var root = firebase.database().ref('/');
             $scope.auth = $firebaseAuth();
+            $scope.distanceFromMe = 10;
+            $scope.distanceForCenters = 100;
+            $scope.selectedDonation = false;
+            $scope.selectedCenter = false;
+            $scope.map;
 
             var init = function(user){
                 if(user){
@@ -33,8 +38,8 @@ angular.module('app')
                                         console.log(volunteer, 'volunteer existe');
                                         $scope.volunteer = volunteer;
                                         if($scope.volunteer.hasOwnProperty('selectedDonation')){
-                                            // esto va a redirigir al usuario al paso correcto
                                             getSelectedDonation($scope.volunteer.selectedDonation);
+                                            initMap();
                                         } else {
                                             $state.go('chooseDonation');
                                         }
@@ -46,7 +51,6 @@ angular.module('app')
                                             active: false
                                         };
                                         console.log($scope.volunteer, 'volunteer no existe');
-                                        console.log('se está en el paso correcto');
                                     }
                                     initiated = true;
                                 });
@@ -63,6 +67,7 @@ angular.module('app')
              * @param string successMsg 
              */
             var saveDonation = function(donation, successMsg){
+                var promise = $q.defer();
                 donation.updatedAt = moment().valueOf();
                 var id = angular.copy(donation.$id);
                 delete donation.$id;
@@ -72,7 +77,13 @@ angular.module('app')
                 root.child('donations').child(id).set(donation).then(function(){
                     donation.$id = id;
                     successAlertS(successMsg);
-                }, errAlertS);
+                    promise.resolve(true);
+                }, function(err){
+                    errAlertS(err);
+                    promise.reject(err);
+                });
+
+                return promise.promise;
             }
 
             /**
@@ -105,8 +116,17 @@ angular.module('app')
                 return promise.promise;
             }
 
+            var getSelectedCenter = function(centerId){
+                console.log("getSelectedCenter", centerId);
+                root.child('centers').child(centerId).once('value', function(snap){
+                    $scope.selectedCenter = snap.val();
+                    $scope.selectedCenter.$id = snap.key;
+                    $scope.$apply();
+                });
+            }
+
             /**
-             * Trae a $scope.selectedDonation la donacion, versión modificada para redireccionar segun status de donación
+             * Trae a $scope.selectedDonation la donacion
              * @param string donationId 
              */
             var getSelectedDonation = function(donationId){
@@ -117,34 +137,84 @@ angular.module('app')
                     $scope.$apply();
                     if($scope.selectedDonation.status == 'esperando' || $scope.selectedDonation.status == 'recogiendo'){
                         $state.go('chooseDonation');
-                    } else  if($scope.selectedDonation.status == 'recogido' || $scope.selectedDonation.status == 'entregando'){
-                        $state.go('chooseCenter');
+                    } else {
+                        if($scope.selectedDonation.hasOwnProperty('deliverAt')){
+                            getSelectedCenter($scope.selectedDonation.deliverAt);
+                        }
                     }
                 });
             }
 
             /**
-             * Salva al voluntario cuando se registra como voluntario
+             * Se inicializa el mapa
              */
-            $scope.save = function(){
-                $log.debug('saving', $scope.volunteer);
-                $scope.volunteer.registeredTovolunteer = true;
-                $scope.volunteer.updatedAt = moment().valueOf();
-                root.child('volunteers').child($scope.volunteer.uid).set($scope.volunteer).then(function(){
-                    successAlertS('Gracias por registrarte como voluntario, en cuanto nos sea posible nos pondremos en contacto contigo');
-                    $state.go('chooseDonation');
-                }, errAlertS);
+            var initMap = function(){ 
+                $scope.centersAvailable = $firebaseArray(root.child('centers'));
+                $scope.centersAvailable.$loaded().then(function(){
+                    getNearestCenters()
+                });
             }
 
             /**
-             * Login con twitter
+             * Se obtienen los centros cercanos
              */
-            $scope.loginWithTwitter = function(){
-                $scope.auth.$signInWithRedirect('twitter').catch(errAlertS);
+            var getNearestCenters = function(){
+                $scope.nearestCenters = $scope.centersAvailable;
+                console.log($scope.nearestCenters, $scope.map.markers, "COOL")
             }
+
+            /**
+             * Cuando se entrega la donación al centro
+             */
+            $scope.deliverDonation = function(){
+                $scope.selectedDonation.status = 'entregado';
+                $scope.selectedDonation.deliveredBy = F.user.uid;
+                saveVolunteer(null, 'selectedDonation').then(function(){
+                    saveDonation($scope.selectedDonation, 'Gracias!! Se entrego la donación correctamente!').then(function(){
+                        $state.go('chooseDonation');
+                    });
+                });
+            }
+
+            /**
+             * Cuando se cancela recoger la donación
+             */
+            $scope.cancelPickup = function(){
+                $scope.selectedDonation.status = 'esperando';
+                $scope.selectedDonation.deliverAt = null;
+                saveVolunteer(null, 'selectedDonation').then(function(){
+                    saveDonation($scope.selectedDonation, 'Se canceló que recogieras esa donación').then(function(){
+                        $scope.selectedDonation = false;
+                        $state.go('chooseDonation'); // se regresa al paso anterior   
+                    });
+                });
+            }
+
+            /**
+             * Cuando se seleccióna un centro a la cual entregar
+             */
+            $scope.selectCenter = function(ev, point){
+                console.log(point, i, "select point");
+                $scope.selectedCenter = point;
+                $scope.selectedDonation.status = 'entregando';
+                $scope.selectedDonation.deliverAt = $scope.selectedCenter.$id;
+                saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
+                    saveDonation($scope.selectedDonation, 'Escogiste un centro').then(function(){
+                        
+                    });
+                });
+            }
+
+            /**
+             * Se inicializa el mapa para ponerlo en scope 
+             * Probablemente necesitemos hacer lo mismo con los otros mapas
+             */
+            NgMap.getMap("map").then(function(evtMap){
+                $scope.map = evtMap;
+            });
             
             /**
-             * En esta parte detectamos cuando se logea para iniciar el ctrl (solo voluntarios)
+             * En esta parte detectamos cuando se logea para iniciar el ctrl
              */
             $rootScope.$on('loggedIn', function(event, logged) {
                 $log.debug(logged, "loggedIn?")
@@ -163,5 +233,15 @@ angular.module('app')
                     init(F.user);
                 }
             }
+            var initWatcher = $scope.$watch('F.user.providerData[0].providerId', function(providerId){
+                if(providerId){
+                    if(providerId !== 'twitter.com'){
+                        $state.go('home');
+                    } else if(!initiated) {
+                        init(F.user);
+                        initWatcher();
+                    }
+                }
+            });
         }
     ]);

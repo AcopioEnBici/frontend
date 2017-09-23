@@ -126,6 +126,7 @@ angular.module('app')
              */
             var initMap = function(){ 
                 $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'));
+                $scope.centersAvailable = $firebaseArray(root.child('centers'));
             }
 
             /**
@@ -141,15 +142,38 @@ angular.module('app')
             }
 
             /**
+             * Se obtienen los centros cercanos
+             */
+            var getNearestCenters = function(){
+                var position = $scope.centrosDeAcopio.markers['myPosition'].getPosition();
+                $scope.currentP = {
+                    latitude: position.lat(), 
+                    longitude: position.lng()
+                }
+                // $scope.nearestCenters = geoDistanceFilter($scope.centersAvailable, $scope.currentP, $scope.distanceFromMe);
+                $scope.nearestCenters = $scope.centersAvailable;
+                console.log($scope.nearestCenters, $scope.centrosDeAcopio.markers, "COOL")
+            }
+
+            /**
              * Se observa el marcador con mi posicion y entonces se obtienen las donaciones cercanas
              */
-            var watchMarkersThenInit = function(){
-                console.log('listening for markers My position', $scope.map.markers.myPosition)
-                $scope.$watch('map.markers.myPosition', function(myPosition){
-                    if(myPosition){
-                        getNearestDonations();
-                    }
-                });
+            var watchMarkersThenInit = function(what){
+                if(what == 'donations'){
+                    console.log('listening for markers My position', $scope.map.markers.myPosition)
+                    $scope.$watch('map.markers.myPosition', function(myPosition){
+                        if(myPosition){
+                            getNearestDonations();
+                        }
+                    });
+                } else {
+                    console.log('listening for markers My position', $scope.centrosDeAcopio.markers.myPosition)
+                    $scope.$watch('centrosDeAcopio.markers.myPosition', function(myPosition){
+                        if(myPosition){
+                            getNearestCenters();
+                        }
+                    });
+                }
             }
 
             /**
@@ -176,7 +200,7 @@ angular.module('app')
              */
             $scope.deliverDonation = function(){
                 $scope.selectedDonation.status = 'entregado';
-                $scope.selectedDonation.deliveredAt = $scope.selectedCenter.name;
+                $scope.selectedDonation.deliveredAt = $scope.selectedCenter.$id;
                 $scope.selectedDonation.deliveredBy = F.user.uid;
                 saveVolunteer(null, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Gracias!! Se entrego la donación correctamente!');
@@ -208,12 +232,26 @@ angular.module('app')
             /**
              * Cuando se seleccióna una donación a la cual recoger
              */
-            $scope.selectPoint = function(ev, point){
+            $scope.selectDonation = function(ev, point){
                 console.log(point, i, "select point");
                 $scope.selectedDonation = point;
                 $scope.selectedDonation.status = 'recogiendo';
                 saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Escogiste una donación');
+                    $scope.$apply();
+                });
+            }
+
+            /**
+             * Cuando se seleccióna un centro a la cual entregar
+             */
+            $scope.selectCenter = function(ev, point){
+                console.log(point, i, "select point");
+                $scope.selectedCenter = point;
+                $scope.selectedDonation.status = 'recogiendo';
+                $scope.selectedDonation.deliverInCenter = 'entregando';
+                saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
+                    saveDonation($scope.selectedDonation, 'Escogiste un centro');
                     $scope.$apply();
                 });
             }
@@ -226,15 +264,28 @@ angular.module('app')
                 $scope.map = evtMap;
             });
 
+            NgMap.getMap("centrosDeAcopio").then(function(evtMap){
+                $scope.centrosDeAcopio = evtMap;
+            });
+
             /**
              * Cuando el documento esta listo, observamos $scope.donationsAvailable y $scope.map.markers.myPosition para inicializar la logica del mapa
              */
             $document.ready(function(){
-                var getNearestWatcher = $scope.$watchGroup(['donationsAvailable', 'map.markers.myPosition'], function(all){
+                var getNearestDonationsWatcher = $scope.$watchGroup(['donationsAvailable', 'map.markers.myPosition'], function(all){
                     if(all[0] && all[1]){
                         if($scope.donationsAvailable.length) {
-                            watchMarkersThenInit()
-                            getNearestWatcher();
+                            watchMarkersThenInit('donations')
+                            getNearestDonationsWatcher();
+                        }
+                    }
+                },1);
+
+                var getNearestCentersWatcher = $scope.$watchGroup(['centersAvailable', 'centrosDeAcopio.markers.myPosition'], function(all){
+                    if(all[0] && all[1]){
+                        if($scope.donationsAvailable.length) {
+                            watchMarkersThenInit('centers')
+                            getNearestCentersWatcher();
                         }
                     }
                 },1);

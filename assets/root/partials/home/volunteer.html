@@ -53,10 +53,10 @@
                         animation="Animation.BOUNCE" 
                         centered="true"></marker>
                     <marker 
-                        on-click="selectPoint(point, $index)" 
-                        ng-repeat="point in nearestDonations track by point.$id"
-                        id="marker-{{point.$id}}" 
-                        position="[{{point.latitude}}, {{point.longitude}}]"></marker>
+                        on-click="selectDonation(donation, $index)" 
+                        ng-repeat="donation in nearestDonations track by donation.$id"
+                        id="marker-donation-{{donation.$id}}" 
+                        position="[{{donation.latitude}}, {{donation.longitude}}]"></marker>
                 </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono una donación -->
@@ -83,18 +83,26 @@
             <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && !selectedCenter'>
                 <h4>Elige un centro de acopio para entregar la donación</h4>
                 <ng-map id="centrosDeAcopio" zoom="14">
-                    <marker centered="true" position="current-location"></marker>
-                    <kml-layer url="http://paintingsolutionstx.com/Shelters.kml"></kml-layer>
+                    <marker 
+                        id="myPosition"
+                        position="current" 
+                        animation="Animation.BOUNCE" 
+                        centered="true"></marker>
+                    <marker 
+                        on-click="selectCenter(center, $index)" 
+                        ng-repeat="center in nearestCenters track by center.$id"
+                        id="marker-center-{{center.$id}}" 
+                        position="[{{center.geometry.coordinates['0']}}, {{center.geometry.coordinates['1']}}]"></marker>
                 </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono el centro de acopio al cual entregar  -->
-            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogido" && selectedCenter'>
+            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "entregando" && selectedCenter'>
                 <ng-map id="direccionACentro" zoom="14">
                     <directions
                         draggable="false"
                         travel-mode="BICYCLING"
                         origin="current-location"
-                        destination="[{{selectedCenter.latitude}}, {{selectedCenter.longitude}}]"></directions>
+                        destination="[{{selectedCenter.geometry.coordinates['0']}}, {{selectedCenter.geometry.coordinates['1']}}]"></directions>
                 </ng-map>
                 <div layout="row" class="md-padding">
                     <div flex>

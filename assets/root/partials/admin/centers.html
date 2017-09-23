@@ -25,11 +25,11 @@
                 </tr>
             </thead>
             <tbody md-body>
-                <tr md-row ng-repeat="center in (filteredItems = (centers | filter:search | orderBy:'date')) | limitTo: F.paginate: (currentPage - 1) * F.paginate" md-select='center' md-select-id='$id' 
+                <tr md-row ng-repeat="center in (filteredItems = (centers | filter:search | orderBy:'date')) | limitTo: F.paginate: (currentPage - 1) * F.paginate" md-select='center' md-select-id='$id'
                     class="noright" ng-class="{'disabled': center.pickedUp}">
-                    <td md-cell>{{center.name}}</td>
-                    <td md-cell>{{center.latitude}}</td>
-                    <td md-cell>{{center.longitude}}</td>
+                    <td md-cell>{{center.properties.Name}}</td>
+                    <td md-cell>{{center.geometry.coordinates[0]}}</td>
+                    <td md-cell>{{center.geometry.coordinates[1]}}</td>
                     <td md-cell>{{center.active ? 'Si' : 'No'}}</td>
                     <th md-cell>
                         <md-button ng-show='!center.active' class="md-primary md-mini md-fav" ng-click="activate(center)">

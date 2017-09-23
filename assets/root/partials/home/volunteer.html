@@ -47,10 +47,10 @@
             <div ng-if='volunteer.active && !selectedDonation'>
                 <h4>Elige un punto para ir por una donación</h4>
                 <ng-map id="map" zoom="14">
-                    <marker 
+                    <marker
                         id="myPosition"
-                        position="current" 
-                        animation="Animation.BOUNCE" 
+                        position="current"
+                        animation="Animation.BOUNCE"
                         centered="true"></marker>
                     <marker 
                         on-click="selectDonation(donation, $index)" 

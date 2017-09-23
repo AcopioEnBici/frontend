@@ -61,6 +61,7 @@ angular.module("app")
                     templateUrl: 'partials/admin/register.html',
                     controller: 'AdminRegisterCtrl'
                 })
+              
                 // cruds
                 // .state('admin.cruds', {
                 //     url: '/cruds',

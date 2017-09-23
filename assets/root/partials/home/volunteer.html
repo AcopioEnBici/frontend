@@ -60,7 +60,7 @@
                 </ng-map>
             </div>
             <!-- Cuando el voluntario ya selecciono una donación -->
-            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "esperando"'>
+            <div ng-if='volunteer.active && selectedDonation && selectedDonation.status == "recogiendo"'>
                 <h4>Elegiste la donación de {{selectedDonation.name}}</h4>
                 <p>Esta en: {{selectedDonation.address}}</p>
                 <ng-map id="direccionADonacion" zoom="14">

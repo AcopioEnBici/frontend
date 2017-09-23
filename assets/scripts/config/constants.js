@@ -3,6 +3,7 @@
 angular.module("app")
     .constant('loginRedirectPath', 'admin.login')
     .constant('allowedOfflineStates', ['admin.login','admin.register','home','donate','deliver','admin.logout'])
+    .constant('adminStates', ['admin.volunteers','admin.donations'])
     .constant('FB_CONFIG', {
         apiKey: "AIzaSyDR-aACSORClSwkE0CcZs8aAmKawIKDYH8",
         authDomain: "acopio-en-bici.firebaseapp.com",

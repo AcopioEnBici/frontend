@@ -41,6 +41,11 @@ angular.module("app")
                     templateUrl: 'partials/admin/volunteers.html',
                     controller: 'AdminVolunteersCtrl'
                 })
+                .state('admin.centers', {
+                    url: '/centros-de-acopio',
+                    templateUrl: 'partials/admin/centers.html',
+                    controller: 'AdminCentersCtrl'
+                })
                 .state('admin.main', {
                     url: '/main',
                     templateUrl: 'partials/admin/main.html',

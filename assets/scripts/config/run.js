@@ -10,15 +10,16 @@ angular.module("app")
         "$timeout",
         "FB_CONFIG",
         "allowedOfflineStates",
+        "adminStates",
         "loginRedirectPath",
         "AppF",
         "$firebaseObject",
-        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, loginRedirectPath, F, $firebaseObject) {
+        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, adminStates, loginRedirectPath, F, $firebaseObject) {
             firebase.initializeApp(config);
 
-            var auth = firebase.auth();
+            F.auth = firebase.auth();
             // watch for login status changes and redirect if appropriate
-            auth.onAuthStateChanged(check);
+            F.auth.onAuthStateChanged(check);
 
             $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
                 if (!F.user) {
@@ -27,8 +28,30 @@ angular.module("app")
                         $localStorage.lastPage = toState.name;
                         $state.go(loginRedirectPath);
                         e.preventDefault();
+                    } 
+                } else {
+                    checkAdmin(toState.name, e);
+                }
+            });
+
+            var checkAdmin = function(route, e){
+                if(isAdmin(route)){
+                    console.log(F.auth, "AUTH")
+                    if(F.user.providerData[0].providerId == 'twitter.com'){
+                        $state.go('home');
+                        $log.error('No tienes permiso para entrar a esta ruta')
+                        e.preventDefault();
                     }
-                } 
+                }
+            }
+
+            $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+                // We can catch the error thrown when the $requireSignIn promise is rejected
+            
+                // and redirect the user back to the home page
+                if (error === "AUTH_REQUIRED") {
+                  $state.go("home");
+                }
             });
             var c = 1;
             function check(user) {
@@ -61,6 +84,14 @@ angular.module("app")
                     isPermitted = true;
                 }
                 return isPermitted;
+            }
+
+            function isAdmin(route){
+                var isAdmin = (adminStates.indexOf(route) !== -1);
+                if(!route){
+                    isPermitted = true;
+                }
+                return isAdmin;
             }
         }
     ]);

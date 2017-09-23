@@ -160,7 +160,7 @@ angular.module('app')
              */
             var getNearestCenters = function(){
                 $scope.nearestCenters = $scope.centersAvailable;
-                console.log($scope.nearestCenters, $scope.map.markers, "COOL")
+                console.log($scope.nearestCenters, "COOL")
             }
 
             /**

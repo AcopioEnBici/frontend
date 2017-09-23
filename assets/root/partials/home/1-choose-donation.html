@@ -10,7 +10,7 @@
     <md-content flex layout="column" class="md-padding">
         <div flex layout="column" ng-show="F.user && volunteer.provider == 'twitter' && volunteer.registeredTovolunteer">
             <!-- Cuando el voluntario esta activo y aun no selecciona donación -->
-            <div ng-show='volunteer.active && !selectedDonation && !volunteer.selectedDonation'>
+            <div ng-if='volunteer.active && !selectedDonation && !volunteer.selectedDonation'>
                 <h4>Elige un punto para ir por una donación</h4>
                 <ng-map id="map" zoom="14">
                     <marker

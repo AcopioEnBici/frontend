@@ -25,6 +25,7 @@ angular.module('app')
             $scope.selectedDonation = false;
             $scope.selectedCenter = false;
             $scope.map;
+            $scope.loading = true;
 
             var init = function(user){
                 if(user){
@@ -39,7 +40,7 @@ angular.module('app')
                                         $scope.volunteer = volunteer;
                                         if($scope.volunteer.hasOwnProperty('selectedDonation')){
                                             getSelectedDonation($scope.volunteer.selectedDonation);
-                                            initMap();
+                                            getMapInfo();
                                         } else {
                                             $state.go('chooseDonation');
                                         }
@@ -145,22 +146,52 @@ angular.module('app')
                 });
             }
 
-            /**
-             * Se inicializa el mapa
-             */
-            var initMap = function(){ 
-                $scope.centersAvailable = $firebaseArray(root.child('centers'));
-                $scope.centersAvailable.$loaded().then(function(){
-                    getNearestCenters()
+            var addMarker = function(lat, lng, name, place){
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat,lng),
+                    map: $scope.map,
+                    title: name
+                });
+                google.maps.event.addListener(marker, 'click', function(){
+                    $scope.selectCenter(place);
+                });
+            }
+
+            var initMap = function(){
+                F.getLocation().then(function(myPosition){
+                    var latlng = new google.maps.LatLng(myPosition.latitude,myPosition.longitude);
+                    var myOptions = {
+                        zoom: 14,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.TERRAIN
+                    };
+                    $scope.map = new google.maps.Map(document.getElementById('map'),myOptions);
+                    // $scope.nearestCenters = geoDistanceFilter($scope.centersAvailable, myPosition, $scope.distanceFromMe);
+                    $scope.nearestCenters = $scope.centersAvailable;
+                    console.log($scope.nearestCenters, "DAMN");
+                    for (var d in $scope.nearestCenters){
+                        var center = $scope.nearestCenters[d];
+                        if(center.hasOwnProperty('$id')){
+                            addMarker(center.geometry.coordinates[1], center.geometry.coordinates[0], center.properties.Name, center);
+                        }
+                    }
+                    $scope.loading = false;
+        
+                    google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+                        google.maps.event.trigger($scope.map, 'resize');
+                        $scope.map.setCenter(latlng);
+                    });
                 });
             }
 
             /**
-             * Se obtienen los centros cercanos
+             * Se inicializa el mapa
              */
-            var getNearestCenters = function(){
-                $scope.nearestCenters = $scope.centersAvailable;
-                console.log($scope.nearestCenters, "COOL")
+            var getMapInfo = function(){ 
+                $scope.centersAvailable = $firebaseArray(root.child('centers'));
+                $scope.centersAvailable.$loaded().then(function(){
+                    initMap();
+                });
             }
 
             /**
@@ -193,7 +224,7 @@ angular.module('app')
             /**
              * Cuando se seleccióna un centro a la cual entregar
              */
-            $scope.selectCenter = function(ev, point){
+            $scope.selectCenter = function(point){
                 console.log(point, i, "select point");
                 $scope.selectedCenter = point;
                 $scope.selectedDonation.status = 'entregando';

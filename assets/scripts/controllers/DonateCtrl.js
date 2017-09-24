@@ -82,12 +82,16 @@ angular.module('app')
                         $scope.map.setCenter(latlng);
                     });
 
+                    // Funcion para que actualize el marker y el infoView del marcador cuando se mueve, de igual forma actualiza el modelo AdressInput
+                    marker.addListener('dragend', function(event){
+                      geocodeLatLng(geocoder, $scope.map,event.latLng,marker,infowindow);
+                    });
+
 
                 });
 
 
             }
-
 
             //todo: pasar a un archivo mapa utils
             // agrego el autocomplete y funcionalidad

@@ -51,7 +51,7 @@ angular.module('app')
                                     }
                                     initiated = true;
                                 });
-                                
+
                             }
                         }
                     }
@@ -60,8 +60,8 @@ angular.module('app')
 
             /**
              * Guarda los cambios que tenga selectedDonation y crea una alera con un mensaje de exito
-             * @param {*} donation 
-             * @param string successMsg 
+             * @param {*} donation
+             * @param string successMsg
              */
             var saveDonation = function(donation, successMsg){
                 var promise = $q.defer();
@@ -85,8 +85,8 @@ angular.module('app')
 
             /**
              * Guarda una propiedad y valor especificos del voluntario logeado
-             * @param {*} value 
-             * @param string prop 
+             * @param {*} value
+             * @param string prop
              */
             var saveVolunteer = function(value, prop){
                 console.log(value, prop, 'saving volunteer');
@@ -95,7 +95,7 @@ angular.module('app')
 
             /**
              * Se checa si el user logeado es un voluntario o aun no ha sido creado
-             * @param string uid 
+             * @param string uid
              */
             var checkIfUserExist = function(uid){
                 var promise = $q.defer();
@@ -115,7 +115,7 @@ angular.module('app')
 
             /**
              * Trae a $scope.selectedDonation la donacion
-             * @param string donationId 
+             * @param string donationId
              */
             var getSelectedDonation = function(donationId){
                 console.log("SIP", donationId);
@@ -129,6 +129,7 @@ angular.module('app')
                 });
             }
 
+            //FACTORIZAR
             var addMarker = function(lat, lng, name, place){
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat,lng),
@@ -154,7 +155,7 @@ angular.module('app')
                         var donation = $scope.nearestDonations[d];
                         addMarker(donation.latitude, donation.longitude, donation.name + ' - ' + donation.categoryOfDonations, donation);
                     }
-        
+
                     $scope.loading = false;
                     google.maps.event.addListenerOnce($scope.map, 'idle', function() {
                         google.maps.event.trigger($scope.map, 'resize');
@@ -166,7 +167,7 @@ angular.module('app')
             /**
              * Se inicializa el mapa
              */
-            var getMapInfo = function(){ 
+            var getMapInfo = function(){
                 $scope.donationsAvailable = $firebaseArray(root.child('donations').orderByChild('status').equalTo('esperando'));
                 $scope.donationsAvailable.$loaded().then(function(){
                     initMap();
@@ -206,7 +207,7 @@ angular.module('app')
                     saveDonation($scope.selectedDonation, 'Se canceló que recogieras esa donación').then(function(){
                         $scope.selectedDonation = false;
                     });
-                    
+
                 });
             }
 

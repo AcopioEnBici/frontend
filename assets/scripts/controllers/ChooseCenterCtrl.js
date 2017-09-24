@@ -55,7 +55,7 @@ angular.module('app')
                                     }
                                     initiated = true;
                                 });
-                                
+
                             }
                         }
                     }
@@ -64,8 +64,8 @@ angular.module('app')
 
             /**
              * Guarda los cambios que tenga selectedDonation y crea una alera con un mensaje de exito
-             * @param {*} donation 
-             * @param string successMsg 
+             * @param {*} donation
+             * @param string successMsg
              */
             var saveDonation = function(donation, successMsg){
                 var promise = $q.defer();
@@ -89,8 +89,8 @@ angular.module('app')
 
             /**
              * Guarda una propiedad y valor especificos del voluntario logeado
-             * @param {*} value 
-             * @param string prop 
+             * @param {*} value
+             * @param string prop
              */
             var saveVolunteer = function(value, prop){
                 console.log(value, prop, 'saving volunteer');
@@ -99,7 +99,7 @@ angular.module('app')
 
             /**
              * Se checa si el user logeado es un voluntario o aun no ha sido creado
-             * @param string uid 
+             * @param string uid
              */
             var checkIfUserExist = function(uid){
                 var promise = $q.defer();
@@ -128,7 +128,7 @@ angular.module('app')
 
             /**
              * Trae a $scope.selectedDonation la donacion
-             * @param string donationId 
+             * @param string donationId
              */
             var getSelectedDonation = function(donationId){
                 console.log("getSelectedDonation", donationId);
@@ -176,7 +176,7 @@ angular.module('app')
                         }
                     }
                     $scope.loading = false;
-        
+
                     google.maps.event.addListenerOnce($scope.map, 'idle', function() {
                         google.maps.event.trigger($scope.map, 'resize');
                         $scope.map.setCenter(latlng);
@@ -187,7 +187,7 @@ angular.module('app')
             /**
              * Se inicializa el mapa
              */
-            var getMapInfo = function(){ 
+            var getMapInfo = function(){
                 $scope.centersAvailable = $firebaseArray(root.child('centers'));
                 $scope.centersAvailable.$loaded().then(function(){
                     initMap();
@@ -216,7 +216,7 @@ angular.module('app')
                 saveVolunteer(null, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Se canceló que recogieras esa donación').then(function(){
                         $scope.selectedDonation = false;
-                        $state.go('chooseDonation'); // se regresa al paso anterior   
+                        $state.go('chooseDonation'); // se regresa al paso anterior
                     });
                 });
             }
@@ -238,13 +238,13 @@ angular.module('app')
             }
 
             /**
-             * Se inicializa el mapa para ponerlo en scope 
+             * Se inicializa el mapa para ponerlo en scope
              * Probablemente necesitemos hacer lo mismo con los otros mapas
              */
             NgMap.getMap("map").then(function(evtMap){
                 $scope.map = evtMap;
             });
-            
+
             /**
              * En esta parte detectamos cuando se logea para iniciar el ctrl
              */

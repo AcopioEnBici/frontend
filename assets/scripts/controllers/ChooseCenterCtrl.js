@@ -225,13 +225,14 @@ angular.module('app')
              * Cuando se seleccióna un centro a la cual entregar
              */
             $scope.selectCenter = function(point){
-                console.log(point, i, "select point");
+                console.log(point, "select point");
+                $scope.loading = true;
                 $scope.selectedCenter = point;
                 $scope.selectedDonation.status = 'entregando';
                 $scope.selectedDonation.deliverAt = $scope.selectedCenter.$id;
                 saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Escogiste un centro').then(function(){
-                        
+                        $scope.loading = false;
                     });
                 });
             }

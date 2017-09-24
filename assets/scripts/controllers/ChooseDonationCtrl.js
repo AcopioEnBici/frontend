@@ -23,7 +23,6 @@ angular.module('app')
             $scope.distanceFromMe = 10;
             $scope.selectedDonation = false;
             $scope.map;
-            $scope.loading = true;
 
             var init = function(user){
                 if(user){
@@ -36,6 +35,7 @@ angular.module('app')
                                     if(volunteer){
                                         console.log(volunteer, 'volunteer existe');
                                         $scope.volunteer = volunteer;
+                                        if(volunteer.active) $scope.loading = true;
                                         if($scope.volunteer.hasOwnProperty('selectedDonation')){
                                             getSelectedDonation($scope.volunteer.selectedDonation);
                                         }
@@ -201,7 +201,7 @@ angular.module('app')
              */
             $scope.cancelPickup = function(){
                 $scope.selectedDonation.status = 'esperando';
-                $scope.selectDonation.deliverAt = null;
+                $scope.selectedDonation.deliverAt = null;
                 saveVolunteer(null, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Se canceló que recogieras esa donación').then(function(){
                         $scope.selectedDonation = false;
@@ -214,12 +214,13 @@ angular.module('app')
              * Cuando se seleccióna una donación a la cual recoger
              */
             $scope.selectDonation = function(point){
-                console.log(point, i, "select point");
+                $scope.loading = true;
+                console.log(point, "select point");
                 $scope.selectedDonation = point;
                 $scope.selectedDonation.status = 'recogiendo';
                 saveVolunteer($scope.selectedDonation.$id, 'selectedDonation').then(function(){
                     saveDonation($scope.selectedDonation, 'Escogiste una donación').then(function(){
-                        
+                        $scope.loading = false;
                     });
                 });
             }

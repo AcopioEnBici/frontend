@@ -56,10 +56,21 @@ angular.module("app")
                         e.preventDefault();
                     }
                 }
-                if(F.staffProfile.type == 'staff'){
-                    $state.go('admin.donations');
-                    $log.error('No tienes permiso para entrar a esta ruta')
-                    e.preventDefault();
+                if(F.staffProfile){
+                    if(F.staffProfile.type == 'staff'){
+                        $state.go('admin.donations');
+                        $log.error('No tienes permiso para entrar a esta ruta')
+                        e.preventDefault();
+                    }   
+                } else {
+                    firebase.database().ref('/users').child(F.user.uid).child('type').once('value', function(snap){
+                        var type = snap.val();
+                        if(type == 'staff'){
+                            $state.go('admin.donations');
+                            $log.error('No tienes permiso para entrar a esta ruta')
+                            e.preventDefault();
+                        }
+                    });
                 }
             }
 

@@ -47,7 +47,7 @@ angular.module("app")
 
             $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
                 // We can catch the error thrown when the $requireSignIn promise is rejected
-                console.log("WTF", error);
+                console.log("error de ruta", error);
                 // and redirect the user back to the home page
                 if (error === "AUTH_REQUIRED") {
                     $state.go("home");
@@ -67,6 +67,11 @@ angular.module("app")
                             firebase.database().ref('/volunteers').child(user.uid).once('value', function(snap){
                                 var profile = snap.val();
                                 if(profile) F.userProfile = profile;
+                            });
+                        } else {
+                            firebase.database().ref('/users').child(user.uid).once('value', function(snap){
+                                var profileS = snap.val();
+                                if(profileS) F.staffProfile = profileS;
                             });
                         }
                     }

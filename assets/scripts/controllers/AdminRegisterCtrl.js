@@ -14,10 +14,12 @@ angular.module('app')
             $scope.auth = $firebaseAuth();
             $scope.admin = {};
             var root = firebase.database().ref('/')
-            
+
             $scope.register = function() {
                 AppF.loading = true;
                 $log.debug('register', $scope.credentials);
+                $scope.admin.type="staff";
+                $scope.admin.createdAt = moment().valueOf();
                 $scope.auth.$createUserWithEmailAndPassword($scope.admin.email, $scope.admin.password).then(function(user) {
                     $scope.saveProfile(user.uid).then(function(){
                         successAlert('Se creo el usuario, en cuanto sea aprobado por administración, podras entrar.')
@@ -26,7 +28,7 @@ angular.module('app')
                         errAlert(err);
                         AppF.loading = false;
                     });
-                    
+
                 }).catch(function(err){
                     errAlert(err);
                     AppF.loading = false;

@@ -7,13 +7,11 @@ angular.module('app')
         "$http",
         "$sessionStorage",
         "AppF",
-        function($rootScope, $scope, $http, $sessionStorage, AppF) {
+        "$state",
+        "volunteerStates",
+        function($rootScope, $scope, $http, $sessionStorage, AppF, $state, volunteerStates) {
             $rootScope.F = AppF;
-            
-            var init = function() {
-                
-            }
-
-            init();
+            $rootScope.state = $state;
+            $rootScope.volunteerStates = volunteerStates;
         }
     ]);

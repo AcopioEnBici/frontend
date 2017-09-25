@@ -58,8 +58,6 @@ angular.module('app')
 
                 F.getLocation().then(function(myPosition){
                     var latlng = new google.maps.LatLng(myPosition.latitude,myPosition.longitude);
-                    $scope.donator.latitude = myPosition.latitude;
-                    $scope.donator.longitude = myPosition.longitude;
                     var myOptions = {
                         zoom: 14,
                         center: latlng,
@@ -117,13 +115,9 @@ angular.module('app')
                       map.fitBounds(place.geometry.viewport);
                     } else {
                       map.setCenter(place.geometry.location);
-
                     }
 
                     marker.setPosition(place.geometry.location);
-                    $scope.donator.latitude = place.geometry.location.lat();
-                    $scope.donator.longitude = place.geometry.location.lng();
-
                     marker.setVisible(true);
                     var address = '';
                     if (place.address_components) {
@@ -150,6 +144,10 @@ angular.module('app')
                         $scope.addressInput=detailUbicacion;
                         infowindow.setContent(detailUbicacion);
                         infowindow.open(map, marker);
+
+                        // seteo la direccion a donator\
+                        $scope.donator.latitude = latlng.lat();
+                        $scope.donator.longitude = latlng.lng();
                         $scope.$apply();
                         return detailUbicacion;
                       } else {

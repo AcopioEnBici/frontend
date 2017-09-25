@@ -5,6 +5,8 @@ angular.module("app")
         "$stateProvider",
         "$urlRouterProvider",
         function($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.when('', '/');
+            $urlRouterProvider.otherwise('/404');
             $stateProvider
                 .state('home', {
                     url: '/',
@@ -83,7 +85,7 @@ angular.module("app")
                 //     controller: 'CrudsCtrl'
                 // })
 
-            $urlRouterProvider.when('', '/');
-            $urlRouterProvider.otherwise('/404');
+            
+            
         }
     ]);

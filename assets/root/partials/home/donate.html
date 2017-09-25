@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-field" ng-class="{'error': donateForm.sizeOfBag.$invalid}">
-                            <label for="sizeOfBag">Tamaño de Mochila <span>*</span></label>
+                            <label for="sizeOfBag">Peso y Tamaño de la Donación<span>*</span></label>
                             <div class="field-container">
                                 <input name="sizeOfBag" type="text" ng-model="donator.sizeOfBag" required  placeholder="ej: 20 kg, 40 cm * 20 cm" />
                             </div>
@@ -125,8 +125,8 @@
                     <div class="form-row">
                         <div class="form-field">
                             <label for="ubication">Ubicaci&oacute;nes de recolecci&oacute;n </label>
-                            <input id="addressInput" placeholder="Introduce un lugar" ng-model="addressInput" places-auto-complete types="['geocode']" name="ubication" on-place-changed="getCoords()" component-restrictions="{country:'mx'}"
-                            />
+                            <input id="addressIn" class="controls" type="text"
+        placeholder="Ingresa una direcci&oacute;n" ng-model="addressInput">
                         </div>
                         <div class="form-field" ng-class="{'error': donateForm.address.$invalid}">
                             <label for="address">Dirección Completa <span>*</span></label>
@@ -140,9 +140,12 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <ng-map id="map">
+                        <!--<ng-map id="map">
                             <marker centered="true"  position="current-location" draggable="true"></marker>
                         </ng-map>
+                      -->
+                      <div id="map" class="map" flex layout-fill></div>
+
                     </div>
                     <div class="form-row">
                         <br><br>

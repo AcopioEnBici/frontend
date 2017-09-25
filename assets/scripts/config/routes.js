@@ -21,6 +21,16 @@ angular.module("app")
                     templateUrl: 'partials/home/volunteer.html',
                     controller: 'VolunteerCtrl'
                 })
+                .state('chooseDonation', {
+                    url: '/selecciona-donacion',
+                    templateUrl: 'partials/home/1-choose-donation.html',
+                    controller: 'ChooseDonationCtrl'
+                })
+                .state('chooseCenter', {
+                    url: '/selecciona-centro-de-acopio',
+                    templateUrl: 'partials/home/2-choose-center.html',
+                    controller: 'ChooseCenterCtrl'
+                })
                 .state('admin', {
                     url: '/admin',
                     templateUrl: 'partials/admin/index.html',
@@ -41,6 +51,11 @@ angular.module("app")
                     templateUrl: 'partials/admin/volunteers.html',
                     controller: 'AdminVolunteersCtrl'
                 })
+                .state('admin.centers', {
+                    url: '/centros-de-acopio',
+                    templateUrl: 'partials/admin/centers.html',
+                    controller: 'AdminCentersCtrl'
+                })
                 .state('admin.main', {
                     url: '/main',
                     templateUrl: 'partials/admin/main.html',
@@ -56,6 +71,7 @@ angular.module("app")
                     templateUrl: 'partials/admin/register.html',
                     controller: 'AdminRegisterCtrl'
                 })
+              
                 // cruds
                 // .state('admin.cruds', {
                 //     url: '/cruds',

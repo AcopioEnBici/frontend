@@ -7,7 +7,7 @@ angular.module("app")
         "$locationProvider",
         function($mdThemingProvider, $logProvider, $locationProvider){
             $logProvider.debugEnabled(true);
-            $locationProvider.html5Mode(false);
+            $locationProvider.html5Mode(true);
             
             $mdThemingProvider.theme('red')
                 .primaryPalette('red')

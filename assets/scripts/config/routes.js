@@ -7,7 +7,7 @@ angular.module("app")
         function($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state('home', {
-                    url: '/inicio',
+                    url: '/',
                     templateUrl: 'partials/home/index.html',
                     controller: 'HomeCtrl'
                 })
@@ -88,6 +88,7 @@ angular.module("app")
                 //     controller: 'CrudsCtrl'
                 // })
 
+            $urlRouterProvider.when('', '/');
             $urlRouterProvider.otherwise('/404');
         }
     ]);

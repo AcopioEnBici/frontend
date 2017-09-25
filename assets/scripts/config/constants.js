@@ -3,7 +3,8 @@
 angular.module("app")
     .constant('loginRedirectPath', 'admin.login')
     .constant('allowedOfflineStates', ['404','admin.login','admin.register','home','donate','deliver','admin.logout','chooseDonation','chooseCenter'])
-    .constant('adminStates', ['admin.volunteers','admin.donations'])
+    .constant('staffStates', ['admin.volunteers','admin.donations'])
+    .constant('adminStates', ['admin.staff'])
     .constant('volunteerStates', ['donate','deliver','chooseDonation','chooseCenter'])
     .constant('FB_CONFIG', {
         apiKey: "AIzaSyDR-aACSORClSwkE0CcZs8aAmKawIKDYH8",

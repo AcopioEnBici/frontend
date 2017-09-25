@@ -10,11 +10,12 @@ angular.module("app")
         "$timeout",
         "FB_CONFIG",
         "allowedOfflineStates",
+        "staffStates",
         "adminStates",
         "loginRedirectPath",
         "AppF",
         "$firebaseObject",
-        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, adminStates, loginRedirectPath, F, $firebaseObject) {
+        function($rootScope, $state, $log, $location, $localStorage, $timeout, config, states, staffStates, adminStates, loginRedirectPath, F, $firebaseObject) {
             firebase.initializeApp(config);
 
             F.auth = firebase.auth();
@@ -30,18 +31,46 @@ angular.module("app")
                         e.preventDefault();
                     } 
                 } else {
+                    checkStaff(toState.name, e);
                     checkAdmin(toState.name, e);
                 }
             });
 
-            var checkAdmin = function(route, e){
-                if(isAdmin(route)){
-                    console.log(F.auth, "AUTH")
+            var checkStaff = function(route, e){
+                if(isStaff(route)){
+                    console.log(F.auth, "AUTH Staff")
                     if(F.user.providerData[0].providerId == 'twitter.com'){
                         $state.go('home');
                         $log.error('No tienes permiso para entrar a esta ruta')
                         e.preventDefault();
                     }
+                }
+            }
+
+            var checkAdmin = function(route, e){
+                if(isAdmin(route)){
+                    console.log(F.auth, "AUTH Admin")
+                    if(F.user.providerData[0].providerId == 'twitter.com'){
+                        $state.go('home');
+                        $log.error('No tienes permiso para entrar a esta ruta')
+                        e.preventDefault();
+                    }
+                }
+                if(F.staffProfile){
+                    if(F.staffProfile.type == 'staff'){
+                        $state.go('admin.donations');
+                        $log.error('No tienes permiso para entrar a esta ruta')
+                        e.preventDefault();
+                    }   
+                } else {
+                    firebase.database().ref('/users').child(F.user.uid).child('type').once('value', function(snap){
+                        var type = snap.val();
+                        if(type == 'staff'){
+                            $state.go('admin.donations');
+                            $log.error('No tienes permiso para entrar a esta ruta')
+                            e.preventDefault();
+                        }
+                    });
                 }
             }
 
@@ -91,6 +120,14 @@ angular.module("app")
                     isPermitted = true;
                 }
                 return isPermitted;
+            }
+
+            function isStaff(route){
+                var isStaff = (staffStates.indexOf(route) !== -1);
+                if(!route){
+                    isPermitted = true;
+                }
+                return isStaff;
             }
 
             function isAdmin(route){

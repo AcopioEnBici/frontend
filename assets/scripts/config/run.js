@@ -47,10 +47,12 @@ angular.module("app")
 
             $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
                 // We can catch the error thrown when the $requireSignIn promise is rejected
-            
+                console.log("WTF", error);
                 // and redirect the user back to the home page
                 if (error === "AUTH_REQUIRED") {
-                  $state.go("home");
+                    $state.go("home");
+                } else {
+                    $state.go("404");
                 }
             });
             var c = 1;

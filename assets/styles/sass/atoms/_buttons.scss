@@ -1,16 +1,20 @@
 .btn {
-  border-radius: 25px;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
   display: inline-block;
   @include font-montserrat-bold;
   font-size: 18px;
-  min-width: 220px;
+  min-width: 240px;
   padding: 14px 20px;
+  text-align: center;
   text-decoration: none;
-  &:hover {
-    background: $cyan !important;
-    color: white !important;
+  // &:hover {
+  //   background: $cyan !important;
+  //   color: white !important;
+  // }
+  &:focus {
+    outline: none;
   }
   .fa {
     color: inherit;
@@ -20,9 +24,22 @@
   &.btn-magenta, &.btn-send {
     background: $magenta;
     color: $white;
+    &:hover {
+      background: lighten($magenta, 10%);
+    }
   }
   &.btn-yellow {
     background: $yellow;
-    color: $gray;
+    color: $black;
+    &:hover {
+      background: lighten($yellow, 25%);
+    }
+  }
+  &.btn-dark {
+    background: $black;
+    color: $white;
+    &:hover {
+      background: lighten($black, 25%);
+    }
   }
 }

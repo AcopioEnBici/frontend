@@ -1,3 +1,7 @@
+.form-container {
+  text-align: center;
+}
+
 .form {
   float: left;
   text-align: left;
@@ -15,6 +19,9 @@
       &:last-child {
         float: right;
       }
+      &.full-field {
+        width: 100%;
+      }
       label {
         float: left;
         @include font-montserrat-bold;
@@ -22,7 +29,7 @@
         margin: 0 0 10px 0;
         width: 100%;
       }
-      input, select {
+      input, textarea, select {
         background: transparent;
         border: 1px solid $gray-soft;
         border-radius: 25px;
@@ -42,6 +49,20 @@
           @include box-shadow(0,0,4px,0, $yellow);
         }
       }
+      input[type="radio"], input[type="checkbox"] {
+        border: none;
+        @include border-radius(0);
+        cursor: pointer;
+        width: initial;
+      }
+      input[type="checkbox"]:focus {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      input[type="radio"]:focus {
+        border: none !important;
+        box-shadow: none !important;
+      }
       select {
         background: transparent;
         height: 51px;
@@ -58,22 +79,77 @@
           font-size: 20px;
           position: absolute;
           right: 20px;
-          top: 50%;
-          @include transform(translateY(-50%));
+          top: 16px;
           z-index: -1;
         }
         &.select-container {
           .fa-caret-up {
             top: calc(50% - 5px);
+            @include transform(translateY(-50%));
           }
           .fa-caret-down {
             top: calc(50% + 5px);
+            @include transform(translateY(-50%));
+          }
+        }
+        .checkbox-container, .radio-container {
+          float: left;
+          height: 21px;
+          margin-right: 15px;
+          position: relative;
+          width: 21px;
+          input {
+            left: 0;
+            height: 28px;
+            margin: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            width: 28px;
+            z-index: 1;
+          }
+          .fa {
+            color:$gray-soft;
+            font-size: 24px;
+            position: relative;
+            right: initial;
+            top: initial;
+            z-index: 0;
+          }
+          input:checked + .fa + .fa {
+            color: $magenta;
+          }
+        }
+        .checkbox-container {
+          .fa-check-square {
+            display: none;
+          }
+          input:checked + .fa {
+            display: none;
+          }
+          input:checked + .fa + .fa-check-square {
+            display: block;
+          }
+        }
+        .radio-container {
+          .fa-circle {
+            display: none;
+          }
+          input:checked + .fa {
+            display: none;
+          }
+          input:checked + .fa + .fa-circle {
+            display: block;
           }
         }
       }
       .btn-send {
-        margin-top: 30px;
         width: 100%;
+      }
+      .field-container + .field-container {
+        .btn-send {
+          margin-top: 34px;
+        }
       }
       &.error {
         input {
@@ -98,7 +174,7 @@
     margin-bottom: 30px;
   }
   .fa-heart {
-    color: $magenta;
+    color: lighten($magenta, 20%);
     font-size: 144px;
   }
 }

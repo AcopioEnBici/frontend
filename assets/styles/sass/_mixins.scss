@@ -197,8 +197,8 @@
 
 // BACKGROUND GRADIENT: LEFT TO RIGHT
 @mixin bg-gradient-l2r($start-colour, $end-colour) {
-    background-color: $start-colour;
-    background-image: -webkit-gradient(linear, left top, right top, from($start-colour), to($end-colour));
+    background: $start-colour;
+    background: -webkit-gradient(linear, left top, right top, from($start-colour), to($end-colour));
     background-image: -webkit-linear-gradient(left, $start-colour, $end-colour);
     background-image:    -moz-linear-gradient(left, $start-colour, $end-colour);
     background-image:     -ms-linear-gradient(left, $start-colour, $end-colour);

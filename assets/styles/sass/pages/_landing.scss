@@ -1,61 +1,57 @@
 .landing {
-  background-color: $cyan;
   //padding-bottom: 50px;
   .landing-container {
-    display: block;
-    background-image: url('../images/hero-main.jpg');
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0 auto;
-    //max-width: 1200px;
-    text-align: center;
-    padding: 50px 0 254px;
-    position: relative;
-    width: 100%;
-    > * {
+      background: $yellow; /* For browsers that do not support gradients */
+      background: -webkit-linear-gradient(to left, $yellow 0%, $magenta 100%); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(to left, $yellow 0%, $magenta 100%); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(to left, $yellow 0%, $magenta 100%); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(to left, $yellow 0%, $magenta 100%); /* Standard syntax */
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 0 254px;
       position: relative;
-      z-index: 1;
-    }
-    &:before {
-      background: rgba($black, 0.6);
-      content: "";
-      display: block;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
       width: 100%;
-      z-index: 0;
-    }
-    h1 {
-      color: white;
-      clear: both;
-      display: block;
-      margin: 20px auto 50px;
-    }
-    .action-btns-container {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-      li {
-        display: inline;
-        margin-left: 30px;
-        &:first-child {
-          margin-left: 0;
-        }
+      > * {
+        position: relative;
+        z-index: 1;
+      }
+      &:before {
+        background:
+        linear-gradient(to left, #FFC107 0%, #E91E63 100%),
+        url('../src/img/hero-main.jpg');
+        background-blend-mode: multiply;
+        //background-opacity: 0.4;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        content: "";
+        display: block;
+        height: 100%;
+        left: 0;
+        opacity: 0.4;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+      }
+      h1 {
+        color: white;
+        clear: both;
+        display: block;
+        margin: 20px auto 50px;
+        padding: 0 30px;
       }
     }
-  }
   .landing-triangles {
-    background-image: url('../images/triangles.svg');
+    background-image: url('../src/img/triangles.svg');
     background-size: 100% 100%;
     background-position: bottom center;
     bottom: 0;
     display: block;
     height: 254px;
     left: 0;
-    opacity: 0.2;
+    //opacity: 0.2;
     position: absolute;
     width: 100%;
     // &:after, &:before {
@@ -66,13 +62,26 @@
     //   width: 50%;
     // }
     // &:after {
-    //   background-image: url('../images/triangle-right.svg');
+    //   background-image: url('../src/img/triangle-right.svg');
     //   background-position: left bottom;
     // }
     // &:before {
-    //   background-image: url('../images/triangle-left.svg');
+    //   background-image: url('../src/img/triangle-left.svg');
     //   background-position: right bottom;
     // }
+  }
+}
+
+.action-btns-container {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    margin-left: 30px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }
 
@@ -84,6 +93,11 @@
         li {
           display: block;
           margin: 0 0 30px 0;
+        }
+      }
+      .landing-copy {
+        h1 {
+          font-size: 30px;
         }
       }
       .landing-triangles {

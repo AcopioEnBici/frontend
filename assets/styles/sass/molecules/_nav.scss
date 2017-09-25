@@ -17,15 +17,18 @@
       text-align: right;
       a {
         color: $white;
+        @include font-montserrat-bold;
         text-decoration: none;
+        letter-spacing: 0.4px;
+        padding-bottom: 2px;
         &:hover {
           color: $yellow;
         }
       }
       &.active {
         a {
+          border-bottom: 2px solid $yellow;
           color: $yellow;
-          text-decoration: underline;
         }
       }
       &:first-child, &:last-child, &:nth-last-child(2) {
@@ -42,6 +45,7 @@
     }
   }
   .nav-trigger {
+    color: $yellow;
     display: none;
     float: right;
     font-size: 24px;
@@ -51,14 +55,13 @@
       display: block;
       float: none;
       position: absolute;
-      right: 20px;
-      top: 30px;
-      #menu {
-        color: yellow;
-      }
-      #close {
-        color: #333;
-        display: none;
+      right: 0;
+      top: 10px;
+      .fa {
+        font-size: 36px;
+        &:before {
+          content: "\f00d";
+        }
       }
       &:hover, &:focus {
         color: white;
@@ -71,22 +74,6 @@
     position: fixed;
     width: 100%;
     z-index: 2;
-    .nav-trigger{
-      float: none;
-      position: absolute;
-      right: 20px;
-      top: 30px;
-      #menu {
-        display: none;
-      }
-      #close {
-        
-      }
-    }
-    
-    &:hover, &:focus {
-      color: white;
-    }
     .logo {
       float: none;
       display: block;

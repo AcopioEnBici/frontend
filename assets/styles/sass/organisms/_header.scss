@@ -5,7 +5,7 @@
   width: 100%;
   &:after {
     content: "";
-    background-image: url('../images/triangles-white.svg');
+    background-image: url('../src/img/triangles-white.svg');
     background-size: 100% 100%;
     background-position: bottom center;
     float: left;
@@ -13,8 +13,12 @@
     position: relative;
     width: 100%;
   }
-
   .hero {
+    background: lighten($magenta, 10%);
+    background: -webkit-linear-gradient(0deg, lighten($magenta, 25%) 0%, $magenta 100%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(0deg, lighten($magenta, 25%) 0%, $magenta 100%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(0deg, lighten($magenta, 25%) 0%, $magenta 100%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(0deg, lighten($magenta, 25%) 0%, $magenta 100%); /* Standard syntax */
     display: block;
     left: 0;
     height: 100%;
@@ -26,21 +30,23 @@
     z-index: 0;
     img {
       //height: auto;
+      mix-blend-mode: multiply;
       object-fit: cover;
       object-position: 50% 50%;
+      opacity: 0.4;
       width: 100%;
     }
-    &:before {
-      background: rgba($black, 0.6);
-      content: "";
-      display: block;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      z-index: 0;
-    }
+    // &:before {
+    //   background: rgba($black, 0.6);
+    //   content: "";
+    //   display: block;
+    //   height: 100%;
+    //   left: 0;
+    //   position: absolute;
+    //   top: 0;
+    //   width: 100%;
+    //   z-index: 0;
+    // }
     figcaption {
       font-size: 14px;
       opacity: 0.5;
@@ -62,7 +68,7 @@
       clear: both;
       display: block;
       font-size: 48px;
-      margin: 50px auto 10px;
+      margin: 50px auto;
       text-align: center;
     }
   }

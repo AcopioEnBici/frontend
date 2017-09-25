@@ -9,6 +9,7 @@ Child theme styles
 @import "mixins";
 @import "variables";
 @import "core";
+@import "customize";
 
 
 // Vendor
@@ -23,6 +24,7 @@ Child theme styles
 @import "molecules/nav.scss";
 @import "molecules/form.scss";
 @import "molecules/social-share.scss";
+@import "molecules/swatches.scss";
 
 // Atoms
 @import "atoms/logo.scss";
@@ -30,7 +32,7 @@ Child theme styles
 
 // Pages
 @import "pages/landing";
-//@import "pages/error404";
+@import "pages/error404";
 
 // Templates
 //@import "templates/template.scss";

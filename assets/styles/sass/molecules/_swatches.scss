@@ -1,0 +1,33 @@
+.swatches-container {
+  float: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  li {
+    list-style: none;
+  }
+  .swatch {
+    border: 1px solid $gray-soft;
+    @include border-radius(4px);
+    display: inline-block;
+    margin: 0 3% 3%;
+    overflow: hidden;
+    padding: 10px;
+    width: 25%;
+    .color-swatch {
+      @include border-radius(4px);
+      float: left;
+      height: 50px;
+      margin-bottom: 10px;
+      width: 100%;
+      &.color-white {
+        border: 1px solid $gray-soft;
+      }
+    }
+    .color-category {
+      float: left;
+      width: 100%;
+    }
+  }
+}

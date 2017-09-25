@@ -71,11 +71,16 @@ angular.module("app")
                     templateUrl: 'partials/admin/register.html',
                     controller: 'AdminRegisterCtrl'
                 })
+                .state('admin.staff', {
+                    url: '/staff',
+                    templateUrl: 'partials/admin/staff.html',
+                    controller: 'AdminStaffCtrl'
+                })
                 .state('404', {
                     url: '/404',
                     templateUrl: '404.html'
                 })
-              
+
                 // cruds
                 // .state('admin.cruds', {
                 //     url: '/cruds',

@@ -12,40 +12,40 @@ angular.module('app')
         function($rootScope, $scope, errAlertS, successAlertS, $firebaseArray, F, $log) {
             var initiated = false;
             var root = firebase.database().ref("/");
-            $scope.staff = [];
+            $scope.users = [];
             $scope.currentPage = 1;
             $scope.selected = [];
 
             var init = function() {
                 initiated = true;
-                $scope.staff = $firebaseArray(root.child('users').orderByChild("type").equalTo("staff"));
+                $scope.users = $firebaseArray(root.child('users').orderByChild("type").equalTo("staff"));
                 $log.debug('Donation Ctrl initiated');
             }
 
-            $scope.save = function(volunteer){
-                $log.debug('saving', volunteer);
-                volunteer.updatedAt = moment().valueOf();
-                volunteer.updatedBy = F.user.uid;
-                $scope.volunteers.$save(volunteer).then(function(){
+            $scope.save = function(user){
+                $log.debug('saving', user);
+                user.updatedAt = moment().valueOf();
+                user.updatedBy = F.user.uid;
+                $scope.users.$save(user).then(function(){
                     successAlertS('Se guardó registro');
                 }, errAlertS);
             }
 
-            $scope.activate = function(volunteer){
-                $log.debug('activate', volunteer);
-                volunteer.active = true;
-                $scope.save(volunteer);
+            $scope.activate = function(user){
+                $log.debug('activate', user);
+                user.active = true;
+                $scope.save(user);
             }
 
-            $scope.deactivate = function(volunteer){
-                $log.debug('deactivate', volunteer);
-                volunteer.active = false;
-                $scope.save(volunteer);
+            $scope.deactivate = function(user){
+                $log.debug('deactivate', user);
+                user.active = false;
+                $scope.save(user);
             }
 
-            $scope.remove = function(volunteer){
-                $log.debug("removing: ", volunteer);
-                return $scope.volunteers.$remove(volunteer);
+            $scope.remove = function(user){
+                $log.debug("removing: ", user);
+                return $scope.users.$remove(user);
             }
 
             $scope.showRemoveDialog = function(ev){

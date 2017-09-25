@@ -12,10 +12,9 @@ angular.module('app')
         "$q",
         "AppF",
         "$firebaseArray",
-        "NgMap",
         "$document",
         "geoDistanceFilter",
-        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F, $firebaseArray, NgMap, $document, geoDistanceFilter) {
+        function($rootScope, $scope, $log, successAlertS, errAlertS, $firebaseAuth, $state, $q, F, $firebaseArray, $document, geoDistanceFilter) {
             var initiated = false;
             $scope.volunteer = {};
             var root = firebase.database().ref('/');

@@ -62,7 +62,7 @@ angular.module("app")
                     controller: 'AdminMainCtrl'
                 })
                 .state('admin.logout', {
-                    url: '/login',
+                    url: '/logout',
                     templateUrl: 'partials/admin/logout.html',
                     controller: 'AdminLogoutCtrl'
                 })
@@ -70,6 +70,10 @@ angular.module("app")
                     url: '/registro',
                     templateUrl: 'partials/admin/register.html',
                     controller: 'AdminRegisterCtrl'
+                })
+                .state('404', {
+                    url: '/404',
+                    templateUrl: '404.html'
                 })
               
                 // cruds
@@ -79,6 +83,6 @@ angular.module("app")
                 //     controller: 'CrudsCtrl'
                 // })
 
-            $urlRouterProvider.otherwise('/inicio');
+            $urlRouterProvider.otherwise('/404');
         }
     ]);

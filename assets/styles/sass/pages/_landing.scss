@@ -19,7 +19,7 @@
       &:before {
         background:
         linear-gradient(to left, #FFC107 0%, #E91E63 100%),
-        url('../src/img/hero-main.jpg');
+        url('../images/hero-main.jpg');
         background-blend-mode: multiply;
         //background-opacity: 0.4;
         background-position: top center;
@@ -44,7 +44,7 @@
       }
     }
   .landing-triangles {
-    background-image: url('../src/img/triangles.svg');
+    background-image: url('../images/triangles.svg');
     background-size: 100% 100%;
     background-position: bottom center;
     bottom: 0;
@@ -62,11 +62,11 @@
     //   width: 50%;
     // }
     // &:after {
-    //   background-image: url('../src/img/triangle-right.svg');
+    //   background-image: url('../images/triangle-right.svg');
     //   background-position: left bottom;
     // }
     // &:before {
-    //   background-image: url('../src/img/triangle-left.svg');
+    //   background-image: url('../images/triangle-left.svg');
     //   background-position: right bottom;
     // }
   }

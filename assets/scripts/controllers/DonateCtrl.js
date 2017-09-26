@@ -37,6 +37,8 @@ angular.module('app')
       $scope.save = function () {
         $scope.donator.createdAt = moment().valueOf();
         $scope.donator.status = 'esperando';
+        $scope.donator.adress = $scope.addressInput;
+        console.info("Donator",$scope.donator)
         console.log('saving', $scope.donator);
         root.child('donations').push($scope.donator).then(function () {
           thanks();
